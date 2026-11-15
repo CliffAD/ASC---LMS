@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asha Sweet Center | Hospitality as Sanctuary</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #9E1B32;        /* Asha Crimson / Burgundy */
+      --primary-dark: #7A1224;
+      --gold: #C88A2E;           /* Antique warm gold */
+      --gold-light: #F4E8D1;
+      --bg-cream: #FAF7F2;       /* Warm ivory sanctuary tone */
+      --bg-white: #FFFFFF;
+      --text-dark: #1F2421;
+      --text-muted: #6B7280;
+      --forest-green: #1E824C;
+      --card-shadow: 0 10px 30px -5px rgba(158, 27, 50, 0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+      --border-light: #EFE9DE;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Top Announcement Bar */
+    .top-bar {
+      background: var(--primary-dark);
+      color: #FFF;
+      font-size: 0.85rem;
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid rgba(200, 138, 46, 0.3);
+    }
+    .top-bar-badge {
+      background: var(--gold);
+      color: #1F2421;
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      margin-right: 8px;
+    }
+    .top-links a {
+      color: #E2E8F0;
+      text-decoration: none;
+      margin-left: 18px;
+      transition: color 0.2s;
+    }
+    .top-links a:hover {
+      color: var(--gold);
+    }
+
+    /* Main Navigation Header */
+    header {
+      background: #FFFFFF;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .main-nav-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* Brand Logo */
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+    .logo-badge {
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(158, 27, 50, 0.3);
+      border: 2px solid var(--gold);
+    }
+    .logo-badge span {
+      color: #FFF;
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+    }
+    .logo-text h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+    .logo-text p {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Category Navigation Bar */
+    .category-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+    .category-nav li a {
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #374151;
+      padding: 10px 16px;
+      border-radius: 8px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+    .category-nav li a:hover,
+    .category-nav li a.active {
+      color: var(--primary);
+      background-color: #FDF2F4;
+    }
+    .category-nav li a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 16px;
+      right: 16px;
+      height: 2.5px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .nav-icon {
+      font-size: 1.1rem;
+    }
+
+    /* Header Utilities */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .search-pill {
+      display: flex;
+      align-items: center;
+      background: var(--bg-cream);
+      border: 1px solid var(--border-light);
+      padding: 8px 14px;
+      border-radius: 24px;
+      font-size: 0.88rem;
+      gap: 8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .search-pill:hover {
+      border-color: var(--gold);
+      background: #FFF;
+    }
+    .btn-order-online {
+      background: var(--primary);
+      color: #FFF;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(158, 27, 50, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+    }
+    .btn-order-online:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(158, 27, 50, 0.35);
+    }
+    .cart-btn {
+      position: relative;
+      background: var(--bg-cream);
+      border: 1px solid var(--border-light);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cart-btn:hover {
+      background: #FFF;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .cart-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: var(--forest-green);
+      color: #FFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #FFF;
+    }
+
+    /* Sub-Category Bar (Secondary Navigation Strip) */
+    .subnav-strip {
+      background: #FFF9F3;
+      border-bottom: 1px solid var(--border-light);
+      padding: 10px 24px;
+    }
+    .subnav-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 24px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .subnav-tag {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 4px 12px;
+      border-radius: 16px;
+      background: #FFF;
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .subnav-tag:hover {
+      border-color: var(--gold);
+      color: var(--primary);
+      background: #FDF9F0;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      padding: 60px 24px 80px;
+      background: linear-gradient(135deg, #FAF7F2 0%, #F5ECE0 100%);
+      overflow: hidden;
+    }
+    .hero-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 50px;
+    }
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(158, 27, 50, 0.08);
+      color: var(--primary);
+      border: 1px solid rgba(158, 27, 50, 0.2);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      line-height: 1.15;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .hero-title span {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: #4B5563;
+      margin-bottom: 35px;
+      max-width: 580px;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 45px;
+    }
+    .btn-primary-hero {
+      background: var(--primary);
+      color: #FFF;
+      padding: 16px 36px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(158, 27, 50, 0.3);
+      transition: all 0.3s;
+    }
+    .btn-primary-hero:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(158, 27, 50, 0.4);
+    }
+    .btn-secondary-hero {
+      background: #FFF;
+      color: var(--text-dark);
+      border: 1px solid var(--border-light);
+      padding: 16px 30px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary-hero:hover {
+      border-color: var(--gold);
+      color: var(--primary);
+    }
+
+    /* Trust Markers */
+    .trust-metrics {
+      display: flex;
+      gap: 30px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding-top: 25px;
+    }
+    .metric-item h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .metric-item p {
+      font-size: 0.85rem;
+      color: #6B7280;
+    }
+
+    /* Hero Visual Showcase */
+    .hero-visual-card {
+      position: relative;
+      border-radius: 24px;
+      background: #FFF;
+      padding: 16px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+      border: 1px solid var(--border-light);
+    }
+    .hero-image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .hero-img-box {
+      height: 185px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .hero-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .hero-img-box:hover img {
+      transform: scale(1.08);
+    }
+    .hero-img-tag {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(31, 36, 33, 0.75);
+      backdrop-filter: blur(4px);
+      color: #FFF;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 8px;
+    }
+    .floating-sanctuary-badge {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background: var(--gold);
+      color: #1F2421;
+      padding: 12px 18px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(200, 138, 46, 0.35);
+      border: 2px solid #FFF;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Primary Category Tiles Section */
+    .category-section {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 80px 24px 60px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-subtitle {
+      color: var(--gold);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .category-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .cat-card {
+      background: #FFF;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+    .cat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px -5px rgba(158, 27, 50, 0.15);
+      border-color: var(--gold);
+    }
+    .cat-card-img {
+      height: 220px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      background: #F3EDE4;
+    }
+    .cat-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .cat-card:hover .cat-card-img img {
+      transform: scale(1.07);
+    }
+    .cat-pill {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--primary);
+      color: #FFF;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .cat-card-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .cat-card-body h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+    .cat-card-body p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .cat-card-link {
+      margin-top: auto;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .cat-card:hover .cat-card-link {
+      gap: 10px;
+      color: var(--gold);
+    }
+
+    /* Sanctuary Philosophy Feature Banner */
+    .sanctuary-banner {
+      background: var(--primary);
+      color: #FFF;
+      border-radius: 24px;
+      margin: 40px auto 80px;
+      max-width: 1380px;
+      padding: 50px 60px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 40px;
+      box-shadow: 0 25px 50px rgba(158, 27, 50, 0.25);
+      border: 1px solid var(--gold);
+    }
+    .sanctuary-banner h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.4rem;
+      color: #FFF;
+      margin-bottom: 16px;
+    }
+    .sanctuary-banner p {
+      color: #F8E2E5;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .sanctuary-quote {
+      border-left: 3px solid var(--gold);
+      padding-left: 18px;
+      font-style: italic;
+      color: var(--gold-light);
+      font-size: 1.1rem;
+    }
+    .sanctuary-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .sanctuary-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 14px 20px;
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .sanctuary-item span.icon {
+      font-size: 1.5rem;
+      background: var(--gold);
+      color: #1F2421;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sanctuary-item h4 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+    .sanctuary-item p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #E2E8F0;
+    }
+
+    /* Footer */
+    footer {
+      background: #141816;
+      color: #9CA3AF;
+      padding: 60px 24px 30px;
+      border-top: 3px solid var(--gold);
+    }
+    .footer-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    .footer-col h4 {
+      color: #FFF;
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links li a {
+      color: #9CA3AF;
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.2s;
+    }
+    .footer-links li a:hover {
+      color: var(--gold);
+    }
+    .footer-bottom {
+      max-width: 1380px;
+      margin: 0 auto;
+      border-top: 1px solid #272E2A;
+      padding-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .category-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-container {
+        grid-template-columns: 1fr;
+      }
+      .sanctuary-banner {
+        grid-template-columns: 1fr;
+      }
+      .footer-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .category-nav {
+        display: none; /* Mobile menu drawer in production */
+      }
+      .category-cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2.4rem;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Info Bar -->
+  <div class="top-bar">
+    <div>
+      <span class="top-bar-badge">Sanctuary Delivery</span>
+      <span>100% Pure Desi Ghee & Fresh Dairy • Crafted Daily with Love</span>
+    </div>
+    <div class="top-links">
+      <a href="#stores">📍 Store Locator (ASC-024)</a>
+      <a href="#bulk">🎁 Corporate Gifting</a>
+      <a href="#contact">📞 Customer Care</a>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header>
+    <div class="main-nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo">
+        <div class="logo-badge">
+          <span>A</span>
+        </div>
+        <div class="logo-text">
+          <h1>ASHA</h1>
+          <p>Sweet Center • Est. 1951</p>
+        </div>
+      </a>
+
+      <!-- Category Navigation Menu -->
+      <ul class="category-nav">
+        <li>
+          <a href="#chaats" class="active">
+            <span class="nav-icon">🌶️</span>
+            <span>Chaats</span>
+          </a>
+        </li>
+        <li>
+          <a href="#bakery">
+            <span class="nav-icon">🥐</span>
+            <span>Bakery</span>
+          </a>
+        </li>
+        <li>
+          <a href="#milk-products">
+            <span class="nav-icon">🥛</span>
+            <span>Milk Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="#sweets">
+            <span class="nav-icon">🍯</span>
+            <span>Pure Ghee Sweets</span>
+          </a>
+        </li>
+        <li>
+          <a href="#gifting">
+            <span class="nav-icon">🎁</span>
+            <span>Festive Gifting</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Action Items -->
+      <div class="header-actions">
+        <div class="search-pill">
+          <span>🔍</span>
+          <span>Search Samosa, Rasmalai, Kaju Katli...</span>
+        </div>
+        
+        <div class="cart-btn" title="View Bag">
+          <span>🛍️</span>
+          <div class="cart-badge">2</div>
+        </div>
+
+        <a href="#order" class="btn-order-online">
+          <span>🛵 Order Online</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Sub-Category Navigation Quick-Strip -->
+  <nav class="subnav-strip">
+    <div class="subnav-inner">
+      <span style="font-weight: 700; font-size: 0.85rem; color: var(--primary);">Quick Filters:</span>
+      <a href="#chaats" class="subnav-tag">⚡ Live Chaat Counter</a>
+      <a href="#samosa" class="subnav-tag">🥟 Aloo Samosa (Freshly Fried)</a>
+      <a href="#paneer" class="subnav-tag">🧀 Fresh Malai Paneer</a>
+      <a href="#rasmalai" class="subnav-tag">🍧 Kesar Rasmalai</a>
+      <a href="#khari" class="subnav-tag">🧈 Butter Khari & Puffs</a>
+      <a href="#kaju" class="subnav-tag">✨ Diamond Kaju Katli</a>
+      <a href="#dryfruit" class="subnav-tag">🌰 Sugar-Free Sweets</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      
+      <!-- Left Copy -->
+      <div class="hero-content">
+        <div class="hero-badge-pill">
+          <span>✨</span>
+          <span>THE SANCTUARY OF TASTE & HOSPITALITY</span>
+        </div>
+        
+        <h2 class="hero-title">
+          Tradition in Every Bite,<br>
+          <span>Sanctuary</span> in Every Smile.
+        </h2>
+        
+        <p class="hero-subtitle">
+          Where pure heritage craftsmanship meets the warmth of genuine human care. From crispy street chaats and artisanal bakery bakes to fresh farm-milk dairy and signature pure desi ghee mithai.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#categories" class="btn-primary-hero">Explore Categories ➔</a>
+          <a href="#sanctuary" class="btn-secondary-hero">Our Hospitality Philosophy</a>
+        </div>
+
+        <div class="trust-metrics">
+          <div class="metric-item">
+            <h4>100%</h4>
+            <p>Pure Desi Ghee & A2 Milk</p>
+          </div>
+          <div class="metric-item">
+            <h4>70+ Yrs</h4>
+            <p>Culinary Heritage</p>
+          </div>
+          <div class="metric-item">
+            <h4>Zero</h4>
+            <p>Artificial Additives</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Visual Grid Showcase -->
+      <div class="hero-visual-card">
+        <div class="floating-sanctuary-badge">
+          <span>★</span> 4.9 Rating • 25,000+ Happy Guests
+        </div>
+
+        <div class="hero-image-grid">
+          <!-- Chaat -->
+          <div class="hero-img-box">
+            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80" alt="Crisp Samosa & Chaat">
+            <span class="hero-img-tag">Live Hot Chaats</span>
+          </div>
+          <!-- Milk Products / Rasmalai -->
+          <div class="hero-img-box">
+            <img src="https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80" alt="Fresh Milk Products">
+            <span class="hero-img-tag">Farm Fresh Milk Sweets</span>
+          </div>
+          <!-- Bakery -->
+          <div class="hero-img-box">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Artisanal Bakery">
+            <span class="hero-img-tag">Oven-Fresh Bakery</span>
+          </div>
+          <!-- Sweets -->
+          <div class="hero-img-box">
+            <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80" alt="Royal Mithai">
+            <span class="hero-img-tag">Pure Ghee Mithai</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Categories Section -->
+  <section class="category-section" id="categories">
+    <div class="section-header">
+      <div class="section-subtitle">Crafted with Pure Ingredients</div>
+      <h2 class="section-title">Explore by Category</h2>
+    </div>
+
+    <div class="category-cards-grid">
+      
+      <!-- Category 1: Chaats -->
+      <a href="#chaats-menu" class="cat-card">
+        <div class="cat-card-img">
+          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80" alt="Chaats">
+          <span class="cat-pill">Spicy & Tangy</span>
+        </div>
+        <div class="cat-card-body">
+          <h3>Chaats & Street Food</h3>
+          <p>Crispy Aloo Samosas, Raj Kachori, Dahi Batata Puri, and hot Masala Pav crafted fresh at our live stations.</p>
+          <div class="cat-card-link">View 24 Items ➔</div>
+        </div>
+      </a>
+
+      <!-- Category 2: Bakery -->
+      <a href="#bakery-menu" class="cat-card">
+        <div class="cat-card-img">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Bakery">
+          <span class="cat-pill">Baked Daily</span>
+        </div>
+        <div class="cat-card-body">
+          <h3>Artisanal Bakery</h3>
+          <p>Flaky butter khari, herb-crusted toast, premium cashew cookies, savoury veg puffs, and freshly baked rusks.</p>
+          <div class="cat-card-link">View 32 Items ➔</div>
+        </div>
+      </a>
+
+      <!-- Category 3: Milk Products -->
+      <a href="#milk-products-menu" class="cat-card">
+        <div class="cat-card-img">
+          <img src="https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80" alt="Milk Products">
+          <span class="cat-pill">Farm Fresh A2</span>
+        </div>
+        <div class="cat-card-body">
+          <h3>Milk Products & Dairy</h3>
+          <p>Velvety fresh malai paneer, Kesar Rasmalai, creamy rabdi, artisanal curd, and traditional golden cow ghee.</p>
+          <div class="cat-card-link">View 18 Items ➔</div>
+        </div>
+      </a>
+
+      <!-- Category 4: Pure Ghee Sweets -->
+      <a href="#sweets-menu" class="cat-card">
+        <div class="cat-card-img">
+          <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80" alt="Pure Ghee Sweets">
+          <span class="cat-pill">Heritage Recipes</span>
+        </div>
+        <div class="cat-card-body">
+          <h3>Pure Ghee Sweets</h3>
+          <p>Melt-in-mouth Kaju Katli, saffron Motichoor Laddus, royal Mysore Pak, and delicate dry-fruit barfis.</p>
+          <div class="cat-card-link">View 45 Items ➔</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- The Sanctuary Philosophy Banner -->
+  <section class="sanctuary-banner" id="sanctuary">
+    <div>
+      <h2>Hospitality as Sanctuary</h2>
+      <p>
+        In a hurried, automated world, we believe in creating sacred spaces of nourishment. We automate the friction so our people can pour 100% of their heart into welcoming you.
+      </p>
+      <div class="sanctuary-quote">
+        “The customer is the most important person on our premises. You are not an interruption to our work—you are the purpose of it.”
+      </div>
+    </div>
+
+    <div class="sanctuary-badges">
+      <div class="sanctuary-item">
+        <span class="icon">🙏</span>
+        <div>
+          <h4>Welcome with Namaste</h4>
+          <p>Undivided attention for every guest</p>
+        </div>
+      </div>
+      <div class="sanctuary-item">
+        <span class="icon">🌿</span>
+        <div>
+          <h4>Purity in Ingredients</h4>
+          <p>Zero adulteration, 100% pure nutrition</p>
+        </div>
+      </div>
+      <div class="sanctuary-item">
+        <span class="icon">⚡</span>
+        <div>
+          <h4>Accurate & Seamless</h4>
+          <p>Effortless billing and thoughtful packaging</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4 style="color: var(--gold); letter-spacing: 1px;">ASHA SWEET CENTER</h4>
+        <p style="margin-bottom: 20px; line-height: 1.7;">
+          Serving authentic Indian sweets, savouries, bakery, and dairy delicacies since 1951. Built on the promise of accurate billing, friendly service, and happy customers.
+        </p>
+        <p style="color: #FFF;">📍 Store ASC-024 • Open Daily: 8:00 AM – 10:30 PM</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Menu</h4>
+        <ul class="footer-links">
+          <li><a href="#chaats">Live Chaats Counter</a></li>
+          <li><a href="#bakery">Artisanal Bakery & Puffs</a></li>
+          <li><a href="#milk">Fresh Milk & Dairy Sweets</a></li>
+          <li><a href="#sweets">Pure Desi Ghee Mithai</a></li>
+          <li><a href="#namkeen">Farsan & Savouries</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Hospitality SOPs</h4>
+        <ul class="footer-links">
+          <li><a href="#">Our Customer Charter</a></li>
+          <li><a href="#">Travel-Friendly Packaging</a></li>
+          <li><a href="#">Service Recovery & Care</a></li>
+          <li><a href="#">KDS Online Order Quality</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay in Touch</h4>
+        <p style="margin-bottom: 15px; font-size: 0.9rem;">Receive invitations to seasonal tasting menus and festival gifting previews.</p>
+        <div style="display: flex; gap: 8px;">
+          <input type="email" placeholder="Enter your email" style="padding: 10px 14px; border-radius: 8px; border: 1px solid #374151; background: #1F2421; color: #FFF; flex-grow: 1;">
+          <button style="background: var(--gold); border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;">Join</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Asha Sweet Center (ASC). All rights reserved.</p>
+      <p>Accurate Billing • Friendly Service • Happy Customers</p>
+    </div>
+  </footer>
+
+</body>
+</html>

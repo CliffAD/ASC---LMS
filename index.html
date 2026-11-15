@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asha Sweet Center | Sanctuary Portal & LMS Platform</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #9E1B32;        /* Asha Crimson */
+      --primary-dark: #7A1224;
+      --primary-light: #FDF2F4;
+      --gold: #C88A2E;
+      --gold-light: #FBF4EB;
+      --green: #1E824C;
+      --green-light: #EAF7EE;
+      --navy: #1B365D;
+      --bg: #FAF7F2;
+      --surface: #FFFFFF;
+      --text: #1F2421;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --radius: 14px;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-md: 0 10px 25px -5px rgba(158, 27, 50, 0.08);
+      --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* Universal App Mode Switcher Bar */
+    .app-mode-bar {
+      background: #111413;
+      color: #E2E8F0;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      border-bottom: 2px solid var(--gold);
+    }
+    .app-brand-tag {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .app-mode-switchers {
+      display: flex;
+      gap: 8px;
+      background: #1F2522;
+      padding: 4px;
+      border-radius: 30px;
+      border: 1px solid #333F39;
+    }
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      padding: 7px 18px;
+      border-radius: 24px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s;
+    }
+    .mode-btn:hover { color: #FFF; }
+    .mode-btn.active {
+      background: var(--primary);
+      color: #FFF;
+      box-shadow: 0 4px 12px rgba(158, 27, 50, 0.4);
+    }
+
+    /* Sound Control Pill */
+    .audio-pill {
+      background: rgba(200, 138, 46, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .audio-pill:hover {
+      background: var(--gold);
+      color: #111413;
+    }
+
+    /* Views Container */
+    .app-view { display: none; }
+    .app-view.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ========================================================= */
+    /* VIEW 1: CUSTOMER STOREFRONT STYLES                        */
+    /* ========================================================= */
+    .storefront-nav {
+      background: #FFF;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 49px;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .nav-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+    .logo-text h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+    .logo-text p {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .category-pills {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+    .cat-btn {
+      background: transparent;
+      border: none;
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .cat-btn:hover, .cat-btn.active {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, #FAF7F2 0%, #F5ECE0 100%);
+      padding: 60px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-grid {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 40px;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.2rem;
+      line-height: 1.15;
+      color: var(--primary-dark);
+      margin-bottom: 18px;
+    }
+    .hero-title span { color: var(--gold); font-style: italic; }
+    .hero-desc { font-size: 1.1rem; color: #4B5563; margin-bottom: 28px; max-width: 580px; }
+    .hero-cta-group { display: flex; gap: 14px; }
+    .btn-crimson {
+      background: var(--primary);
+      color: #FFF;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(158, 27, 50, 0.25);
+      transition: all 0.2s;
+    }
+    .btn-crimson:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    /* Product Grid */
+    .menu-section {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .section-title-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 30px;
+    }
+    .section-title-wrap h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .food-card {
+      background: #FFF;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .food-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--gold);
+    }
+    .food-img {
+      height: 190px;
+      position: relative;
+      background: #F3ECE1;
+      overflow: hidden;
+    }
+    .food-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .food-card:hover .food-img img { transform: scale(1.08); }
+    .tag-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--primary);
+      color: #FFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 14px;
+      text-transform: uppercase;
+    }
+    .food-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .food-body h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .food-body p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+    .food-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+    .food-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .add-to-cart-btn {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .add-to-cart-btn:hover {
+      background: var(--primary);
+      color: #FFF;
+    }
+
+    /* Floating Cart Drawer */
+    .cart-drawer {
+      position: fixed;
+      right: -420px;
+      top: 0;
+      width: 400px;
+      height: 100vh;
+      background: #FFF;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cart-drawer.open { right: 0; }
+    .cart-header {
+      padding: 20px;
+      background: var(--primary);
+      color: #FFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-items-wrap {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-footer {
+      padding: 20px;
+      border-top: 2px solid var(--border);
+      background: var(--bg);
+    }
+
+    /* ========================================================= */
+    /* VIEW 2: STAFF POS & URBANPIPER SIMULATOR                 */
+    /* ========================================================= */
+    .pos-screen-wrap {
+      background: #1E293B;
+      color: #FFF;
+      min-height: calc(100vh - 49px);
+      padding: 24px;
+    }
+    .pos-top-nav {
+      background: var(--primary);
+      padding: 10px 18px;
+      display: flex;
+      gap: 16px;
+      border-radius: 8px 8px 0 0;
+    }
+    .pos-tab {
+      background: transparent;
+      border: none;
+      color: #FFF;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 8px 18px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .pos-tab.active { background: #FFF; color: var(--primary); }
+    .pos-main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      background: #0F172A;
+      border: 1px solid #334155;
+      min-height: 580px;
+    }
+    .pos-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .pos-table th {
+      background: #1E293B;
+      color: #94A3B8;
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #334155;
+    }
+    .pos-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #1E293B;
+    }
+    .pos-table tr:hover { background: rgba(255,255,255,0.03); cursor: pointer; }
+    .pos-table tr.selected { background: rgba(158, 27, 50, 0.25); border-left: 4px solid var(--primary); }
+    .pos-sidebar {
+      background: #1E293B;
+      border-left: 1px solid #334155;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .pos-action-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+    }
+    .btn-accept { background: var(--green); color: #FFF; }
+    .btn-accept:hover { background: #166534; }
+    .btn-ready { background: #EA580C; color: #FFF; }
+    .btn-ready:hover { background: #C2410C; }
+
+    /* ========================================================= */
+    /* VIEW 3: ASHA ACADEMY LMS STYLES                           */
+    /* ========================================================= */
+    .lms-layout {
+      display: flex;
+      min-height: calc(100vh - 49px);
+    }
+    .lms-sidebar {
+      width: 290px;
+      background: #141816;
+      color: #E2E8F0;
+      padding: 20px;
+      border-right: 1px solid #272E2A;
+      flex-shrink: 0;
+    }
+    .lms-main {
+      flex: 1;
+      padding: 36px;
+      overflow-y: auto;
+    }
+    .lms-module-card {
+      background: #FFF;
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+    .lms-nav-link {
+      display: block;
+      padding: 10px 14px;
+      color: #CBD5E1;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+    .lms-nav-link:hover, .lms-nav-link.active {
+      background: var(--primary);
+      color: #FFF;
+    }
+
+    /* Certificate Box */
+    .cert-box {
+      background: #FFF;
+      border: 8px double var(--gold);
+      border-radius: 14px;
+      padding: 40px;
+      text-align: center;
+      max-width: 750px;
+      margin: 20px auto;
+      box-shadow: var(--shadow-md);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Universal Mode Switcher Bar -->
+  <div class="app-mode-bar">
+    <div class="app-brand-tag">
+      <span style="color: var(--gold); font-size: 1.2rem;">🏛️</span>
+      <span>ASHA SWEET CENTER • EST. 1951</span>
+    </div>
+
+    <div class="app-mode-switchers">
+      <button class="mode-btn active" onclick="switchAppMode('storefront')">
+        <span>🛍️</span>
+        <span>Customer Storefront</span>
+      </button>
+      <button class="mode-btn" onclick="switchAppMode('pos')">
+        <span>🖥️</span>
+        <span>POS & UrbanPiper Terminal</span>
+      </button>
+      <button class="mode-btn" onclick="switchAppMode('lms')">
+        <span>🎓</span>
+        <span>Asha Academy LMS</span>
+      </button>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <button class="audio-pill" onclick="playNamasteBell()">
+        <span>🔔</span>
+        <span>Sound FX: Active</span>
+      </button>
+      <span style="font-size: 0.8rem; color: #94A3B8; font-family: 'JetBrains Mono', monospace;">STORE: ASC-024</span>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 1. CUSTOMER STOREFRONT VIEW                              -->
+  <!-- ========================================================= -->
+  <div id="view-storefront" class="app-view active">
+    
+    <!-- Top Navigation Bar -->
+    <nav class="storefront-nav">
+      <div class="nav-container">
+        
+        <a href="#" class="brand-logo" onclick="playChime()">
+          <div class="logo-badge">A</div>
+          <div class="logo-text">
+            <h1>ASHA</h1>
+            <p>Sweet Center • Est. 1951</p>
+          </div>
+        </a>
+
+        <!-- Category Navigation Menu -->
+        <ul class="category-pills">
+          <li><button class="cat-btn active" onclick="filterCategory('all', this)">All Delicacies</button></li>
+          <li><button class="cat-btn" onclick="filterCategory('chaats', this)">🌶️ Chaats</button></li>
+          <li><button class="cat-btn" onclick="filterCategory('bakery', this)">🥐 Bakery</button></li>
+          <li><button class="cat-btn" onclick="filterCategory('milk', this)">🥛 Milk Products</button></li>
+          <li><button class="cat-btn" onclick="filterCategory('sweets', this)">🍯 Pure Ghee Sweets</button></li>
+          <li><button class="cat-btn" onclick="filterCategory('gifting', this)">🎁 Festive Gifting</button></li>
+        </ul>
+
+        <!-- Cart Button -->
+        <button class="btn-crimson" onclick="toggleCart()" style="padding: 10px 22px; font-size: 0.9rem;">
+          🛒 Bag (<span id="cartCountBadge">0</span>)
+        </button>
+
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-banner">
+      <div class="hero-grid">
+        <div>
+          <span style="color: var(--primary); font-weight: 800; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase;">
+            Pure Desi Ghee & Fresh Dairy • Crafted Daily
+          </span>
+          <h2 class="hero-title">
+            Tradition in Every Bite,<br>
+            <span>Sanctuary</span> in Every Smile.
+          </h2>
+          <p class="hero-desc">
+            Welcome to Bengaluru's legendary sweet house since 1951. Experience authentic street chaats, oven-fresh bakery puffs, unadulterated farm milk dairy, and pure ghee mithai.
+          </p>
+          <div class="hero-cta-group">
+            <button class="btn-crimson" onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})">
+              Explore Menu ➔
+            </button>
+            <button class="btn-crimson" style="background: #FFF; color: var(--text); border: 1px solid var(--border);" onclick="switchAppMode('pos')">
+              ⚡ Staff POS View
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=700&q=80" 
+               alt="Asha Chaats" 
+               style="width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg); border: 3px solid #FFF;">
+        </div>
+      </div>
+    </header>
+
+    <!-- Menu Section -->
+    <main class="menu-section" id="menu">
+      <div class="section-title-wrap">
+        <div>
+          <span style="color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1.5px;">Curated Offerings</span>
+          <h2 id="currentCategoryHeading">All Handcrafted Delicacies</h2>
+        </div>
+        <span style="font-size: 0.9rem; color: var(--text-muted);" id="productCountLabel">Showing 9 Items</span>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Injected via JS -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Your Sanctuary Bag</h3>
+      <button onclick="toggleCart()" style="background: none; border: none; color: #FFF; font-size: 1.4rem; cursor: pointer;">✕</button>
+    </div>
+    <div class="cart-items-wrap" id="cartItemsContainer">
+      <p style="color: var(--text-muted); text-align: center; margin-top: 40px;">Your bag is currently empty.</p>
+    </div>
+    <div class="cart-footer">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600;">
+        <span>Subtotal:</span>
+        <span id="cartSubtotal">₹0.00</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 0.85rem; color: var(--text-muted);">
+        <span>GST (5%):</span>
+        <span id="cartGst">₹0.00</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.2rem; font-weight: 800; color: var(--primary);">
+        <span>Total Payable:</span>
+        <span id="cartTotal">₹0.00</span>
+      </div>
+      <button class="btn-crimson" style="width: 100%;" onclick="checkoutOrder()">
+        Proceed to Checkout (Order to Store ASC-024)
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 2. STAFF POS & URBANPIPER SIMULATOR VIEW                 -->
+  <!-- ========================================================= -->
+  <div id="view-pos" class="app-view">
+    <div class="pos-screen-wrap">
+      
+      <div class="pos-top-nav">
+        <button class="pos-tab">SHOWROOM</button>
+        <button class="pos-tab active">URBANPIPER (ONLINE ORDERS)</button>
+        <button class="pos-tab">ORDERBOOKING</button>
+        <button class="pos-tab">QUOTATION</button>
+        <span style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; padding-top: 6px;">
+          STAFF ID: 3133 | CASHIER: ROHAN | STORE: ASC024
+        </span>
+      </div>
+
+      <div class="pos-main-grid">
+        
+        <!-- Orders Table -->
+        <div style="padding: 16px;">
+          <h4 style="margin-bottom: 14px; color: #94A3B8;">Incoming Online Aggregator Orders (Zomato / Swiggy)</h4>
+          <table class="pos-table">
+            <thead>
+              <tr>
+                <th>Store No.</th>
+                <th>Aggregator</th>
+                <th>Ext Order ID</th>
+                <th>Receipt No.</th>
+                <th>Items Summary</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="posOrdersTbody">
+              <tr class="selected" onclick="selectPosOrder(0)">
+                <td>ASC024</td>
+                <td><strong style="color: #EF4444;">Zomato</strong></td>
+                <td>7938874250</td>
+                <td>00000024T10000010679</td>
+                <td>10x Aloo Samosa (Send cutlery)</td>
+                <td><span style="background: #FBBF24; color: #000; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.75rem;" id="order0Status">PENDING ACCEPTANCE</span></td>
+              </tr>
+              <tr onclick="selectPosOrder(1)">
+                <td>ASC024</td>
+                <td><strong style="color: #F97316;">Swiggy</strong></td>
+                <td>7938684253</td>
+                <td>00000024T50000004834</td>
+                <td>1x Veg Cheese Sandwich, 1x Choco Oreo Shake</td>
+                <td><span style="background: #34D399; color: #000; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.75rem;">IN KITCHEN</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top: 24px; padding: 16px; background: rgba(30, 41, 59, 0.7); border-radius: 8px; border: 1px dashed #475569;">
+            <h5 style="color: var(--gold); margin-bottom: 6px;">💡 SOP Reminder (Slide: Customer Handling & POS Precision)</h5>
+            <p style="font-size: 0.85rem; color: #CBD5E1;">
+              Small checks prevent billing errors and protect customer trust. Focus on one order at a time, check special instructions, and dispatch kitchen tickets immediately to KDS.
+            </p>
+          </div>
+        </div>
+
+        <!-- POS Side Controls -->
+        <div class="pos-sidebar">
+          <h4 style="margin-bottom: 12px; color: var(--gold);">Selected Order Actions</h4>
+          
+          <div style="background: #0F172A; padding: 14px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
+            <p><strong>Customer:</strong> Shashi (08045688694)</p>
+            <p><strong>Order Item:</strong> 10x Aloo Samosa</p>
+            <p><strong>Total:</strong> ₹460.00 (Incl. GST)</p>
+            <p style="color: #FBBF24; margin-top: 6px;">Note: "Send extra green chutney & cutlery"</p>
+          </div>
+
+          <button class="pos-action-btn btn-accept" id="btnAcceptPos" onclick="acceptPosOrder()">
+            ✓ Accept Order (Send to KDS)
+          </button>
+
+          <button class="pos-action-btn btn-ready" id="btnReadyPos" onclick="markFoodReady()" disabled style="opacity: 0.5;">
+            🍲 Mark Food Ready (Alert Rider)
+          </button>
+
+          <button class="pos-action-btn" style="background: #334155; color: #FFF;" onclick="reprintSlip()">
+            🖨️ Re-Print Order Slip
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 3. ASHA ACADEMY LMS VIEW                                 -->
+  <!-- ========================================================= -->
+  <div id="view-lms" class="app-view">
+    <div class="lms-layout">
+      
+      <div class="lms-sidebar">
+        <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 6px;">ASHA ACADEMY</h3>
+        <p style="font-size: 0.75rem; color: #94A3B8; margin-bottom: 20px;">Cashier & Hospitality Curriculum</p>
+
+        <a class="lms-nav-link active" onclick="switchLmsLesson('m1', this)">1. Customer Handling (Namaste)</a>
+        <a class="lms-nav-link" onclick="switchLmsLesson('m2', this)">2. LS POS Billing Precision</a>
+        <a class="lms-nav-link" onclick="switchLmsLesson('m3', this)">3. Payment & Safe Handover</a>
+        <a class="lms-nav-link" onclick="switchLmsLesson('m4', this)">4. UrbanPiper Online Orders</a>
+        <a class="lms-nav-link" onclick="switchLmsLesson('m5', this)">5. Problem Handling (No Argue)</a>
+        <a class="lms-nav-link" onclick="switchLmsLesson('quiz', this)" style="color: var(--gold); font-weight: 700; margin-top: 18px;">
+          🎯 Take Mastery Quiz
+        </a>
+        <a class="lms-nav-link" onclick="switchLmsLesson('cert', this)" style="color: #34D399; font-weight: 700;">
+          🏆 View Certificate
+        </a>
+      </div>
+
+      <div class="lms-main">
+        <div class="lms-module-card" id="lmsContentBox">
+          <!-- Dynamic Content Loaded via switchLmsLesson -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // =========================================================
+    // AUDIO SYNTHESIS ENGINE (Web Audio API - Pure & Lightweight)
+    // =========================================================
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function getAudioCtx() {
+      if (!audioCtx) audioCtx = new AudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    // Melodic Namaste Chime
+    function playNamasteBell() {
+      const ctx = getAudioCtx();
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      notes.forEach((freq, idx) => {
+        setTimeout(() => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 1.2);
+        }, idx * 140);
+      });
+    }
+
+    // Interactive Button Click Chime
+    function playChime() {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.3);
+    }
+
+    // POS Register Beep
+    function playRegisterBeep() {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(1400, ctx.currentTime);
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.15);
+    }
+
+    // Kitchen Printer Sound
+    function playPrinterSound() {
+      const ctx = getAudioCtx();
+      for (let i = 0; i < 4; i++) {
+        setTimeout(() => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(320 + (i % 2 * 60), ctx.currentTime);
+          gain.gain.setValueAtTime(0.04, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.08);
+        }, i * 90);
+      }
+    }
+
+    // =========================================================
+    // STOREFRONT & CATALOG ENGINE
+    // =========================================================
+    const products = [
+      { id: 814, name: "Aloo Samosa (Freshly Fried)", category: "chaats", price: 46.00, tag: "Best Seller", img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80", desc: "Crispy golden crust filled with spiced potatoes, peas, and served with tangy saunth chutney." },
+      { id: 815, name: "Special Raj Kachori", category: "chaats", price: 120.00, tag: "Live Counter", img: "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80", desc: "Crisp oversized puri loaded with bhalla, fresh yogurt, pomegranate pearls, and roasted cumin." },
+      { id: 920, name: "Traditional Butter Khari", category: "bakery", price: 85.00, tag: "Oven Fresh", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80", desc: "Melt-in-mouth flaky butter puff biscuits baked daily using heritage recipe." },
+      { id: 921, name: "Royal Cashew Cookies (250g)", category: "bakery", price: 160.00, tag: "Artisanal", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80", desc: "Handcrafted shortbread biscuits enriched with roasted cashew nuts and cardamom." },
+      { id: 1040, name: "Fresh Malai Paneer (500g)", category: "milk", price: 215.00, tag: "Farm Fresh A2", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80", desc: "Velvety, unadulterated cottage cheese made from 100% pure full-cream cow milk." },
+      { id: 1041, name: "Kesar Rasmalai (2 Pcs)", category: "milk", price: 95.00, tag: "Signature Sweet", img: "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80", desc: "Spongy cottage cheese patties steeped in saffron-cardamom clotted cream milk with pistachios." },
+      { id: 701, name: "Royal Mysore Pak (Pure Ghee)", category: "sweets", price: 320.00, tag: "Legacy 1951", img: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80", desc: "Asha's iconic melt-in-mouth delicacy crafted in pure aromatic golden cow ghee." },
+      { id: 702, name: "Diamond Kaju Katli (250g)", category: "sweets", price: 290.00, tag: "Top Rated", img: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80", desc: "Finest Goan cashews ground to perfection, sweetened with unrefined cane sugar." },
+      { id: 1201, name: "Sanctuary Festive Hamper", category: "gifting", price: 850.00, tag: "Gift Box", img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80", desc: "Curated gift box featuring Mysore Pak, Kaju Katli, Butter Khari, and dry fruits in an airtight keepsake tin." }
+    ];
+
+    let cart = [];
+
+    // Mode Switcher
+    function switchAppMode(mode) {
+      playChime();
+      document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.mode-btn').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(`view-${mode}`).classList.add('active');
+      event.target.closest('.mode-btn').classList.add('active');
+    }
+
+    // Render Product Cards
+    function renderProducts(items) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = items.map(p => `
+        <div class="food-card">
+          <div class="food-img">
+            <img src="${p.img}" alt="${p.name}">
+            <span class="tag-badge">${p.tag}</span>
+          </div>
+          <div class="food-body">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="food-price-row">
+              <span class="food-price">₹${p.price.toFixed(2)}</span>
+              <button class="add-to-cart-btn" onclick="addToCart(${p.id})">+ Add to Bag</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('productCountLabel').innerText = `Showing ${items.length} Items`;
+    }
+
+    // Category Filter
+    function filterCategory(cat, btn) {
+      playChime();
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const headings = {
+        all: "All Handcrafted Delicacies",
+        chaats: "🌶️ Live Chaats & Street Food",
+        bakery: "🥐 Artisanal Bakery & Puffs",
+        milk: "🥛 Fresh Milk Products & Dairy",
+        sweets: "🍯 Pure Ghee Heritage Mithai",
+        gifting: "🎁 Festive Gift Boxes & Hampers"
+      };
+      document.getElementById('currentCategoryHeading').innerText = headings[cat] || "Delicacies";
+
+      if (cat === 'all') {
+        renderProducts(products);
+      } else {
+        renderProducts(products.filter(p => p.category === cat));
+      }
+    }
+
+    // Cart Interactions
+    function addToCart(productId) {
+      playRegisterBeep();
+      const item = products.find(p => p.id === productId);
+      const existing = cart.find(c => c.id === productId);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ ...item, qty: 1 });
+      }
+      updateCartUI();
+      openCart();
+    }
+
+    function toggleCart() {
+      playChime();
+      document.getElementById('cartDrawer').classList.toggle('open');
+    }
+    function openCart() {
+      document.getElementById('cartDrawer').classList.add('open');
+    }
+
+    function updateCartUI() {
+      const count = cart.reduce((acc, i) => acc + i.qty, 0);
+      document.getElementById('cartCountBadge').innerText = count;
+
+      const container = document.getElementById('cartItemsContainer');
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="color: var(--text-muted); text-align: center; margin-top: 40px;">Your bag is currently empty.</p>`;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div>
+              <div style="font-weight: 700;">${item.name}</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">₹${item.price.toFixed(2)} × ${item.qty}</div>
+            </div>
+            <div style="font-weight: 800; font-family: 'JetBrains Mono', monospace;">
+              ₹${(item.price * item.qty).toFixed(2)}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const gst = subtotal * 0.05;
+      const total = subtotal + gst;
+
+      document.getElementById('cartSubtotal').innerText = `₹${subtotal.toFixed(2)}`;
+      document.getElementById('cartGst').innerText = `₹${gst.toFixed(2)}`;
+      document.getElementById('cartTotal').innerText = `₹${total.toFixed(2)}`;
+    }
+
+    function checkoutOrder() {
+      if (cart.length === 0) return alert('Your bag is empty!');
+      playNamasteBell();
+      alert('🎉 Order placed successfully! Routing to Store ASC-024 Kitchen Display System (KDS)...');
+      cart = [];
+      updateCartUI();
+      toggleCart();
+      switchAppMode('pos');
+    }
+
+    // =========================================================
+    // POS & URBANPIPER TERMINAL SIMULATION
+    // =========================================================
+    function acceptPosOrder() {
+      playRegisterBeep();
+      setTimeout(playPrinterSound, 250);
+
+      document.getElementById('order0Status').innerText = 'IN KITCHEN (KDS)';
+      document.getElementById('order0Status').style.background = '#34D399';
+      document.getElementById('btnAcceptPos').disabled = true;
+      document.getElementById('btnAcceptPos').style.opacity = '0.5';
+      
+      const readyBtn = document.getElementById('btnReadyPos');
+      readyBtn.disabled = false;
+      readyBtn.style.opacity = '1';
+
+      alert('Order #7938874250 Accepted! Digital ticket sent to KDS Station: ONLINE CHAATS.');
+    }
+
+    function markFoodReady() {
+      playPrinterSound();
+      document.getElementById('order0Status').innerText = 'FOOD READY (RIDER NOTIFIED)';
+      document.getElementById('order0Status').style.background = '#60A5FA';
+      alert('Food Ready marked! Dispatch ticket printed for Delivery Partner handover.');
+    }
+
+    function reprintSlip() {
+      playPrinterSound();
+      alert('Estimate Ticket #00000024T10000010679 Re-printed.');
+    }
+
+    // =========================================================
+    // ASHA ACADEMY LMS ENGINE
+    // =========================================================
+    const lmsModules = {
+      m1: {
+        title: "Module 1: Customer Handling (The 5 Golden Steps)",
+        content: `
+          <span style="color: var(--primary); font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">Frontline Hospitality SOP</span>
+          <h2 style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--primary-dark); margin: 6px 0 16px;">
+            Customer Handling: The 5 Golden Steps
+          </h2>
+          <p style="font-size: 1rem; color: #475569; margin-bottom: 24px;">
+            Professional service starts before a single sweet is packed. Welcome each customer with folded hands (<strong>Namaste</strong>), make direct eye contact, and serve one customer at a time.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+            <div style="background: #FDF4E7; padding: 18px; border-radius: 12px; border-left: 4px solid var(--gold);">
+              <h4 style="color: var(--primary);">1. Greet Immediately</h4>
+              <p style="font-size: 0.85rem; color: #64748B;">Namaste with eye contact. Never let a guest stand unacknowledged.</p>
+            </div>
+            <div style="background: #FDF4E7; padding: 18px; border-radius: 12px; border-left: 4px solid var(--gold);">
+              <h4 style="color: var(--primary);">2. Understand & Take</h4>
+              <p style="font-size: 0.85rem; color: #64748B;">Ask occasion, exact item name, and weight. Repeat order to confirm.</p>
+            </div>
+            <div style="background: #FDF4E7; padding: 18px; border-radius: 12px; border-left: 4px solid var(--gold);">
+              <h4 style="color: var(--primary);">3. Suggest & Thank</h4>
+              <p style="font-size: 0.85rem; color: #64748B;">Suggest pairings without pressure. Hand over with both hands and thank.</p>
+            </div>
+          </div>
+          <button class="btn-crimson" onclick="switchLmsLesson('m2', null)">Next: LS POS Billing Accuracy ➔</button>
+        `
+      },
+      m2: {
+        title: "Module 2: LS POS Billing Precision",
+        content: `
+          <span style="color: var(--navy); font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">Software Operating Procedure</span>
+          <h2 style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--navy); margin: 6px 0 16px;">
+            LS POS System Flow & Zero-Error Billing
+          </h2>
+          <p style="font-size: 1rem; color: #475569; margin-bottom: 24px;">
+            Follow the approved sequence: <code>Logon -> Estimate -> New -> Verify Staff ID (3133) -> Enter Item Code -> Enter Salesperson Code -> Scan Bill -> Collect Payment</code>.
+          </p>
+          <div style="background: #FEF2F2; border-left: 4px solid #DC2626; padding: 16px; border-radius: 8px; margin-bottom: 20px;">
+            <strong style="color: #DC2626;">STRICT RULE:</strong> Never guess an item code or weight. Small checks prevent billing errors and protect customer trust.
+          </div>
+          <button class="btn-crimson" onclick="switchLmsLesson('m3', null)">Next: Payment & Safe Handover ➔</button>
+        `
+      },
+      m3: {
+        title: "Module 3: Payment Verification & Safe Handover",
+        content: `
+          <span style="color: var(--green); font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">Loss Prevention & Quality Hand-off</span>
+          <h2 style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--green); margin: 6px 0 16px;">
+            The 3-Point Payment & Packaging Check
+          </h2>
+          <p style="font-size: 1rem; color: #475569; margin-bottom: 24px;">
+            1. Verify successful payment on the card machine / UPI soundbox.<br>
+            2. Check that the tamper seal on travel-safe boxes is intact.<br>
+            3. Hand over the parcel and printed bill with both hands, accompanied by a polite smile.
+          </p>
+          <button class="btn-crimson" onclick="switchLmsLesson('m4', null)">Next: UrbanPiper Online Orders ➔</button>
+        `
+      },
+      m4: {
+        title: "Module 4: UrbanPiper Online Orders & KDS",
+        content: `
+          <span style="color: var(--primary); font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">Online Aggregator Operations</span>
+          <h2 style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--primary-dark); margin: 6px 0 16px;">
+            Swiggy & Zomato Fulfillment via KDS
+          </h2>
+          <p style="font-size: 1rem; color: #475569; margin-bottom: 24px;">
+            Speed and precision go hand in hand. Review special customer instructions (e.g. "Send cutlery"), hit <strong>Accept Order</strong> to route digital tickets to the <code>ONLINE CHAATS</code> station, and click <strong>Food Ready</strong> the moment items are packed.
+          </p>
+          <button class="btn-crimson" onclick="switchLmsLesson('m5', null)">Next: Problem Handling ➔</button>
+        `
+      },
+      m5: {
+        title: "Module 5: Problem Handling (Listen • Apologise • Satisfy • Thank)",
+        content: `
+          <span style="color: #7A1224; font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">The Service Recovery Compass</span>
+          <h2 style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: #7A1224; margin: 6px 0 16px;">
+            The Paramount Rule: NEVER Argue With A Customer
+          </h2>
+          <p style="font-size: 1rem; color: #475569; margin-bottom: 24px;">
+            When an issue arises: <strong>1. Listen</strong> without interrupting. <strong>2. Apologise</strong> with sincere humility. <strong>3. Satisfy</strong> by replacing the item and having the manager serve complimentary dine-in chaat. <strong>4. Thank</strong> the customer for helping us improve.
+          </p>
+          <button class="btn-crimson" onclick="switchLmsLesson('quiz', null)">Take Mastery Certification Assessment ➔</button>
+        `
+      },
+      quiz: {
+        title: "Mastery Certification Assessment",
+        content: `
+          <h2 style="font-family: 'Cinzel', serif; font-size: 1.6rem; color: var(--primary); margin-bottom: 14px;">
+            Asha Cashier Knowledge Assessment
+          </h2>
+          <p style="margin-bottom: 20px;">Complete this final knowledge check to earn your official certification:</p>
+          
+          <div style="background: #F8F9FA; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border);">
+            <p style="font-weight: 700; margin-bottom: 12px;">Q1: What is the mandatory rule when an upset customer reports a wrong item?</p>
+            <label style="display: block; margin-bottom: 8px;"><input type="radio" name="aq1" value="A"> A) Defend the store's SOP and show the receipt</label>
+            <label style="display: block; margin-bottom: 8px;"><input type="radio" name="aq1" value="B"> B) Never argue: Listen, apologise, replace the order, and delight them</label>
+            <label style="display: block;"><input type="radio" name="aq1" value="C"> C) Tell them to call customer care</label>
+          </div>
+
+          <div style="background: #F8F9FA; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border);">
+            <p style="font-weight: 700; margin-bottom: 12px;">Q2: What should a cashier do if they do not know the item code for a newly added sweet?</p>
+            <label style="display: block; margin-bottom: 8px;"><input type="radio" name="aq2" value="A"> A) Guess a similar priced item code</label>
+            <label style="display: block; margin-bottom: 8px;"><input type="radio" name="aq2" value="B"> B) Search by exact item name in LS or consult the supervisor—never guess</label>
+            <label style="display: block;"><input type="radio" name="aq2" value="C"> C) Skip entering the item</label>
+          </div>
+
+          <button class="btn-crimson" onclick="validateMasteryQuiz()">Submit Assessment for Certification</button>
+        `
+      },
+      cert: {
+        title: "Official Certification Credential",
+        content: `
+          <div class="cert-box">
+            <div style="width: 70px; height: 70px; background: var(--primary); color: #FFF; border: 3px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 800; margin: 0 auto 16px;">A</div>
+            <h1 style="font-family: 'Cinzel', serif; font-size: 2rem; color: var(--primary); letter-spacing: 2px;">ASHA SWEET CENTER</h1>
+            <p style="text-transform: uppercase; letter-spacing: 3px; color: var(--gold); font-weight: 700; font-size: 0.85rem; margin-bottom: 20px;">Academy of Hospitality & Service Excellence</p>
+            
+            <p style="font-size: 0.9rem; color: var(--text-muted);">This is officially awarded to certify that</p>
+            <h2 style="font-size: 1.6rem; color: var(--text); border-bottom: 2px solid var(--gold); display: inline-block; padding: 4px 30px; margin: 8px 0 16px;">Rohan Kumar (Staff ID: 3133)</h2>
+            <p style="font-size: 0.92rem; color: #475569; max-width: 580px; margin: 0 auto 24px; line-height: 1.6;">
+              has demonstrated mastery in <strong>Customer Handling Standards, LS POS Billing Accuracy, Payment Protocol, UrbanPiper Fulfillment, and Conflict Resolution</strong> for Store ASC-024.
+            </p>
+            <div style="display: inline-block; padding: 4px 16px; background: #EAF7EE; color: var(--green); border-radius: 20px; font-weight: 700; font-size: 0.82rem; border: 1px solid #B8E8C7;">
+              ✓ Score: 100% Distinction • Verified Certified Host
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 35px; padding-top: 15px; border-top: 1px dashed var(--border); font-size: 0.85rem;">
+              <div><strong>Kantha Mayya</strong><br><span style="color: var(--text-muted);">Head of Training</span></div>
+              <div><strong>15 Nov 2026</strong><br><span style="color: var(--text-muted);">Date of Issue</span></div>
+              <div><strong>Malleswaram Flagship</strong><br><span style="color: var(--text-muted);">Asha Sweet Center</span></div>
+            </div>
+          </div>
+          <div style="text-align: center; margin-top: 16px;">
+            <button class="btn-crimson" onclick="window.print()">🖨️ Print Certificate</button>
+          </div>
+        `
+      }
+    };
+
+    function switchLmsLesson(key, element) {
+      playChime();
+      if (element) {
+        document.querySelectorAll('.lms-nav-link').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+      }
+      const data = lmsModules[key];
+      if (data) {
+        document.getElementById('lmsContentBox').innerHTML = data.content;
+      }
+    }
+
+    function validateMasteryQuiz() {
+      const q1 = document.querySelector('input[name="aq1"]:checked');
+      const q2 = document.querySelector('input[name="aq2"]:checked');
+
+      if (!q1 || !q2) {
+        alert('Please answer both questions before submitting!');
+        return;
+      }
+
+      if (q1.value === 'B' && q2.value === 'B') {
+        playNamasteBell();
+        alert('🎉 100% Score! Congratulations, you are certified in Asha Sweet Center Service Excellence!');
+        switchLmsLesson('cert', null);
+      } else {
+        playRegisterBeep();
+        alert('❌ Some answers were incorrect. Remember: Never argue with a customer, and never guess item codes!');
+      }
+    }
+
+    // Initialize Default States
+    renderProducts(products);
+    switchLmsLesson('m1', null);
+  </script>
+</body>
+</html>
