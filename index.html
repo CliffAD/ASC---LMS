@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asha Sweet Center | Sanctuary Portal & LMS Platform</title>
+  <link rel="manifest" href="manifest.json">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +68,7 @@
       background: transparent;
       border: none;
       color: #94A3B8;
-      padding: 7px 18px;
+      padding: 7px 16px;
       border-radius: 24px;
       font-size: 0.82rem;
       font-weight: 700;
@@ -495,6 +496,69 @@
       color: #FFF;
     }
 
+    /* ========================================================= */
+    /* VIEW 4: VIDEO SCRIPT & MOTION STUDIO                     */
+    /* ========================================================= */
+    .studio-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .studio-header {
+      background: linear-gradient(135deg, #1E1B2E 0%, #111413 100%);
+      color: #FFF;
+      padding: 32px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gold);
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+    }
+    .scene-card {
+      background: #FFF;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: 240px 1fr 1fr;
+      gap: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s;
+    }
+    .scene-card:hover {
+      border-color: var(--gold);
+      box-shadow: var(--shadow-md);
+    }
+    .scene-card.active-scene {
+      border: 2px solid var(--primary);
+      background: #FFF9FA;
+    }
+    .scene-badge {
+      font-weight: 800;
+      color: var(--primary);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .scene-visual-cue {
+      background: var(--bg);
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #334155;
+      border: 1px solid var(--border);
+    }
+    .scene-vo-box {
+      font-size: 0.95rem;
+      color: #1F2421;
+      line-height: 1.6;
+      border-left: 3px solid var(--gold);
+      padding-left: 14px;
+    }
+
     /* Certificate Box */
     .cert-box {
       background: #FFF;
@@ -529,6 +593,10 @@
       <button class="mode-btn" onclick="switchAppMode('lms')">
         <span>🎓</span>
         <span>Asha Academy LMS</span>
+      </button>
+      <button class="mode-btn" onclick="switchAppMode('studio')">
+        <span>🎬</span>
+        <span>Video & Motion Studio</span>
       </button>
     </div>
 
@@ -768,6 +836,109 @@
       <div class="lms-main">
         <div class="lms-module-card" id="lmsContentBox">
           <!-- Dynamic Content Loaded via switchLmsLesson -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 4. VIDEO & MOTION STUDIO (INTERACTIVE VOICE PLAYER)      -->
+  <!-- ========================================================= -->
+  <div id="view-studio" class="app-view">
+    <div class="studio-wrap">
+      
+      <div class="studio-header">
+        <div>
+          <span style="color: var(--gold); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">
+            Audio-Visual Script Player
+          </span>
+          <h2 style="font-family: 'Cinzel', serif; font-size: 2rem; margin: 4px 0 8px;">
+            "The Asha Service Standard" • Motion Graphics Studio
+          </h2>
+          <p style="color: #CBD5E1; font-size: 0.95rem; max-width: 650px;">
+            Experience the animated video script with live speech narration and synchronized Web Audio cues.
+          </p>
+        </div>
+        <div>
+          <button class="btn-crimson" id="btnPlayVo" onclick="toggleVoNarration()" style="padding: 14px 28px; font-size: 1.05rem;">
+            ▶️ Play English Voiceover
+          </button>
+        </div>
+      </div>
+
+      <!-- Scene 1 -->
+      <div class="scene-card" id="scene1">
+        <div>
+          <span class="scene-badge">Scene 1 • 0:00 - 0:20</span>
+          <h4 style="font-size: 1.1rem; color: var(--primary); margin-top: 4px;">Brand Heritage & The Three Pillars</h4>
+        </div>
+        <div class="scene-visual-cue">
+          <strong>Visual Direction (Motion):</strong><br>
+          Camera pushes through glass doors into Asha Sweet Center. Three 2D vector badges float up: Accuracy (Red), Service (Green), and Customer Trust (Navy).
+        </div>
+        <div class="scene-vo-box">
+          <em>"At Asha Sweet Center, every box of sweets carries tradition, love, and our customers' trust. Small checks prevent billing errors, and friendly service brings guests back!"</em>
+        </div>
+      </div>
+
+      <!-- Scene 2 -->
+      <div class="scene-card" id="scene2">
+        <div>
+          <span class="scene-badge">Scene 2 • 0:20 - 0:50</span>
+          <h4 style="font-size: 1.1rem; color: var(--primary); margin-top: 4px;">Welcome With Namaste & 5 Steps</h4>
+        </div>
+        <div class="scene-visual-cue">
+          <strong>Visual Direction (Motion):</strong><br>
+          Rohan folds hands in Namaste with a warm smile. Kinetic text shows: Greet, Understand, Take Order, Confirm, and Suggest. Focus on ONE customer at a time.
+        </div>
+        <div class="scene-vo-box">
+          <em>"It all begins with a warm smile and folded hands: 'Namaste!' Give undivided attention. Understand their requirement, take exact item codes and weights, and confirm before finalizing."</em>
+        </div>
+      </div>
+
+      <!-- Scene 3 -->
+      <div class="scene-card" id="scene3">
+        <div>
+          <span class="scene-badge">Scene 3 • 0:50 - 1:20</span>
+          <h4 style="font-size: 1.1rem; color: var(--primary); margin-top: 4px;">LS POS Billing & Zero Guesswork</h4>
+        </div>
+        <div class="scene-visual-cue">
+          <strong>Visual Direction (Motion):</strong><br>
+          Zoom into LS POS terminal. Staff ID 3133 verifies. A wrong code causes red warning shake; correct code 814 inputs smoothly. Automatic estimate prints.
+        </div>
+        <div class="scene-vo-box">
+          <em>"Precision matters! Log into LS, verify your Staff ID, and input exact item codes. Never guess a code or estimate weights. Remember: Accurate billing equals a happy customer!"</em>
+        </div>
+      </div>
+
+      <!-- Scene 4 -->
+      <div class="scene-card" id="scene4">
+        <div>
+          <span class="scene-badge">Scene 4 • 1:20 - 1:50</span>
+          <h4 style="font-size: 1.1rem; color: var(--primary); margin-top: 4px;">UrbanPiper & KDS Online Delivery</h4>
+        </div>
+        <div class="scene-visual-cue">
+          <strong>Visual Direction (Motion):</strong><br>
+          Red UrbanPiper tab lights up with Zomato samosa order. Cashier clicks 'Accept Order' (Ctrl+A). Ticket routes to KDS station 'ONLINE CHAATS'. Rider departs.
+        </div>
+        <div class="scene-vo-box">
+          <em>"Online orders need equal speed and care! Check special instructions, click 'Accept Order' to alert the kitchen, and mark 'Food Ready' for immediate rider handover."</em>
+        </div>
+      </div>
+
+      <!-- Scene 5 -->
+      <div class="scene-card" id="scene5">
+        <div>
+          <span class="scene-badge">Scene 5 • 1:50 - 2:20</span>
+          <h4 style="font-size: 1.1rem; color: var(--primary); margin-top: 4px;">The Recovery Compass: Never Argue</h4>
+        </div>
+        <div class="scene-visual-cue">
+          <strong>Visual Direction (Motion):</strong><br>
+          Upset customer approaches. Giant banner: 'NEVER ARGUE WITH A CUSTOMER'. 4 steps resolve: Listen, Apologise, Satisfy with fresh dine-in chaat, and Thank.
+        </div>
+        <div class="scene-vo-box">
+          <em>"When something goes wrong, never panic and NEVER argue. Listen with care, apologise sincerely, replace the order, and have the manager delight them with fresh chaat!"</em>
         </div>
       </div>
 
@@ -1192,6 +1363,74 @@
         playRegisterBeep();
         alert('❌ Some answers were incorrect. Remember: Never argue with a customer, and never guess item codes!');
       }
+    }
+
+    // =========================================================
+    // VIDEO SCRIPT SPEECH NARRATOR (Web Speech API)
+    // =========================================================
+    let isNarrating = false;
+    const scriptCues = [
+      { id: "scene1", text: "At Asha Sweet Center, every box of sweets carries tradition, love, and our customers trust. Small checks prevent billing errors, and friendly service brings guests back!", sound: playNamasteBell },
+      { id: "scene2", text: "It all begins with a warm smile and folded hands: Namaste! Give undivided attention. Understand their requirement, take exact item codes and weights, and confirm before finalizing.", sound: playChime },
+      { id: "scene3", text: "Precision matters! Log into LS, verify your Staff ID, and input exact item codes. Never guess a code or estimate weights. Remember: Accurate billing equals a happy customer!", sound: playRegisterBeep },
+      { id: "scene4", text: "Online orders need equal speed and care! Check special instructions, click Accept Order to alert the kitchen, and mark Food Ready for immediate rider handover.", sound: playPrinterSound },
+      { id: "scene5", text: "When something goes wrong, never panic and never argue. Listen with care, apologise sincerely, replace the order, and have the manager delight them with fresh chaat!", sound: playNamasteBell }
+    ];
+
+    function toggleVoNarration() {
+      if (!('speechSynthesis' in window)) {
+        alert('Speech Synthesis is not supported in this browser.');
+        return;
+      }
+
+      if (isNarrating) {
+        window.speechSynthesis.cancel();
+        isNarrating = false;
+        document.getElementById('btnPlayVo').innerText = '▶️ Play English Voiceover';
+        document.querySelectorAll('.scene-card').forEach(c => c.classList.remove('active-scene'));
+        return;
+      }
+
+      isNarrating = true;
+      document.getElementById('btnPlayVo').innerText = '⏹️ Stop Narration';
+      playScriptScene(0);
+    }
+
+    function playScriptScene(idx) {
+      if (!isNarrating || idx >= scriptCues.length) {
+        isNarrating = false;
+        document.getElementById('btnPlayVo').innerText = '▶️ Play English Voiceover';
+        document.querySelectorAll('.scene-card').forEach(c => c.classList.remove('active-scene'));
+        return;
+      }
+
+      const cue = scriptCues[idx];
+      document.querySelectorAll('.scene-card').forEach(c => c.classList.remove('active-scene'));
+      const activeCard = document.getElementById(cue.id);
+      if (activeCard) {
+        activeCard.classList.add('active-scene');
+        activeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      if (cue.sound) cue.sound();
+
+      const utterance = new SpeechSynthesisUtterance(cue.text);
+      utterance.rate = 0.95;
+      utterance.pitch = 1.0;
+      utterance.lang = 'en-US';
+
+      utterance.onend = () => {
+        setTimeout(() => {
+          if (isNarrating) playScriptScene(idx + 1);
+        }, 600);
+      };
+
+      utterance.onerror = () => {
+        isNarrating = false;
+        document.getElementById('btnPlayVo').innerText = '▶️ Play English Voiceover';
+      };
+
+      window.speechSynthesis.speak(utterance);
     }
 
     // Initialize Default States
