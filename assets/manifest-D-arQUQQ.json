@@ -1,0 +1,16 @@
+{
+  "name": "Asha Sweet Center & Academy",
+  "short_name": "Asha ASC",
+  "description": "Hospitality as Sanctuary, POS Simulation, and Staff Training LMS",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#9E1B32",
+  "icons": [
+    {
+      "src": "landing_page_mockup.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
