@@ -686,6 +686,197 @@
       padding: 14px 16px;
       border-bottom: 1px solid var(--border);
     }
+
+    /* Training media library */
+    .media-intro { margin-bottom: 20px; color: var(--text-muted); line-height: 1.6; }
+    .media-filters { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 20px; }
+    .media-filter { border: 1px solid var(--border); border-radius: 999px; padding: 9px 15px; background: #FFF; color: var(--text); font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; }
+    .media-filter:hover, .media-filter.active { background: var(--primary); border-color: var(--primary); color: #FFF; }
+    .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; }
+    .media-card { padding: 0; overflow: hidden; }
+    .media-card[hidden] { display: none; }
+    .media-preview { width: 100%; height: 245px; display: block; background: #111827; border: 0; }
+    video.media-preview { object-fit: contain; }
+    .media-card-info { padding: 16px 18px 18px; }
+    .media-type { display: inline-block; color: var(--primary); background: var(--primary-light); border-radius: 999px; padding: 4px 9px; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 9px; }
+    .media-card-info h3 { font-size: .98rem; line-height: 1.45; margin-bottom: 12px; overflow-wrap: anywhere; }
+    .media-actions { display: flex; gap: 12px; }
+    .media-actions a { color: var(--primary-dark); font-size: .84rem; font-weight: 700; }
+    .media-empty { display: none; padding: 28px; text-align: center; color: var(--text-muted); background: #FFF; border: 1px dashed var(--border); border-radius: var(--radius); }
+
+    /* Keep the LMS usable on narrow phone screens. */
+    @media (max-width: 760px) {
+      body {
+        display: block;
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      aside {
+        width: 100%;
+        max-height: none;
+        border-right: 0;
+        border-bottom: 1px solid #272E2A;
+      }
+
+      .brand-header {
+        padding: 14px 18px;
+      }
+
+      .learner-card {
+        display: none;
+      }
+
+      .nav-menu {
+        display: flex;
+        flex: none;
+        gap: 8px;
+        padding: 10px 14px 14px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+
+      .nav-section-label {
+        display: none;
+      }
+
+      .nav-item {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 230px;
+        margin: 0;
+        padding: 10px 12px;
+        white-space: nowrap;
+      }
+
+      .nav-status {
+        margin-left: 2px;
+      }
+
+      main {
+        min-width: 0;
+        min-height: calc(100vh - 170px);
+        overflow: visible;
+      }
+
+      .header-bar {
+        height: auto;
+        min-height: 70px;
+        padding: 14px 18px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .header-breadcrumb h3 {
+        font-size: 1rem;
+      }
+
+      .header-actions {
+        width: 100%;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .pill-btn {
+        padding: 8px 11px;
+        font-size: 0.75rem;
+      }
+
+      .content-body {
+        overflow: visible;
+        padding: 18px 14px 28px;
+      }
+
+      .module-banner {
+        padding: 22px 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+      }
+
+      .module-banner-text h1 {
+        font-size: 1.45rem;
+      }
+
+      .module-stats {
+        gap: 10px;
+      }
+
+      .stat-box {
+        flex: 1;
+        padding: 10px 8px;
+      }
+
+      .sop-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .card {
+        min-width: 0;
+        padding: 18px 14px;
+        overflow-x: auto;
+      }
+
+      .card-title {
+        gap: 10px;
+        flex-wrap: wrap;
+        font-size: 1rem;
+      }
+
+      .metrics-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric-card {
+        padding: 14px;
+        min-width: 0;
+      }
+
+      .quiz-card {
+        padding: 20px 16px;
+      }
+
+      .certificate-wrap {
+        padding: 32px 18px;
+      }
+
+      .cert-heading {
+        font-size: 1.55rem;
+        letter-spacing: 1px;
+      }
+
+      .cert-recipient {
+        font-size: 1.35rem;
+        padding: 4px 12px;
+      }
+
+      .cert-footer {
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .brand-title h2 {
+        font-size: 1rem;
+      }
+
+      .header-actions .pill-btn {
+        flex: 1 1 145px;
+        justify-content: center;
+      }
+
+      .stat-box span {
+        font-size: 0.65rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -753,6 +944,11 @@
         <span class="nav-status status-active">Active</span>
       </li>
 
+      <li class="nav-item" onclick="switchTab('tab-media', this)">
+        <span class="icon">🎬</span>
+        <span>Training Media</span>
+      </li>
+
       <div class="nav-section-label">Assessments & Certification</div>
 
       <li class="nav-item" onclick="switchTab('tab-quiz', this)">
@@ -791,6 +987,86 @@
 
     <!-- Content Body -->
     <div class="content-body">
+
+      <!-- ================= TAB: TRAINING MEDIA ================= -->
+      <div id="tab-media" class="tab-pane">
+        <div class="module-banner">
+          <div class="module-banner-text">
+            <h1>Training Media Library</h1>
+            <p>Browse and preview the available training videos and SOP PDFs by department.</p>
+          </div>
+          <div class="module-stats"><div class="stat-box"><h4>6</h4><span>Departments</span></div></div>
+        </div>
+        <p class="media-intro">Choose a department to view its available files. Use the built-in controls to play videos or read PDFs here.</p>
+        <div class="media-filters" role="group" aria-label="Filter training media by department">
+          <button class="media-filter active" type="button" data-category="all" onclick="filterMedia('all', this)">All files</button>
+          <button class="media-filter" type="button" data-category="chaats" onclick="filterMedia('chaats', this)">Chaats</button>
+          <button class="media-filter" type="button" data-category="snacks" onclick="filterMedia('snacks', this)">Snacks</button>
+          <button class="media-filter" type="button" data-category="milk" onclick="filterMedia('milk', this)">Milk</button>
+          <button class="media-filter" type="button" data-category="counter" onclick="filterMedia('counter', this)">Counter</button>
+          <button class="media-filter" type="button" data-category="sweets" onclick="filterMedia('sweets', this)">Sweets</button>
+          <button class="media-filter" type="button" data-category="bakery" onclick="filterMedia('bakery', this)">Bakery Packs</button>
+        </div>
+        <div class="media-grid" id="mediaGrid">
+          <article class="card media-card" data-category="chaats">
+            <img class="media-preview" src="Chaats%20Department%20Training%20-%20ASC.jpeg" alt="Chaats department training reference">
+            <div class="media-card-info"><span class="media-type">Image guide</span><h3>Chaats Department Training</h3><div class="media-actions"><a href="Chaats%20Department%20Training%20-%20ASC.jpeg" target="_blank" rel="noopener">Open full size</a></div></div>
+          </article>
+          <article class="card media-card" data-category="chaats">
+            <img class="media-preview" src="Chaats%20Department%20Training%20Station%20Setup%20-%20ASC.jpeg" alt="Chaats station setup reference">
+            <div class="media-card-info"><span class="media-type">Image guide</span><h3>Chaats Department Training Station Setup</h3><div class="media-actions"><a href="Chaats%20Department%20Training%20Station%20Setup%20-%20ASC.jpeg" target="_blank" rel="noopener">Open full size</a></div></div>
+          </article>
+          <article class="card media-card" data-category="snacks">
+            <iframe class="media-preview" src="Veg_Grill_Sandwich_SOP_One_Page%20pdf.pdf#view=FitH" title="Veg Grill Sandwich SOP PDF"></iframe>
+            <div class="media-card-info"><span class="media-type">PDF</span><h3>Veg Grill Sandwich SOP</h3><div class="media-actions"><a href="Veg_Grill_Sandwich_SOP_One_Page%20pdf.pdf" target="_blank" rel="noopener">Open PDF</a><a href="Veg_Grill_Sandwich_SOP_One_Page%20pdf.pdf" download>Download</a></div></div>
+          </article>
+          <article class="card media-card" data-category="snacks">
+            <iframe class="media-preview" src="Cheese_Corn_Grilled_Sandwich_SOP%20pdf.pdf#view=FitH" title="Cheese Corn Grilled Sandwich SOP PDF"></iframe>
+            <div class="media-card-info"><span class="media-type">PDF</span><h3>Cheese Corn Grilled Sandwich SOP</h3><div class="media-actions"><a href="Cheese_Corn_Grilled_Sandwich_SOP%20pdf.pdf" target="_blank" rel="noopener">Open PDF</a><a href="Cheese_Corn_Grilled_Sandwich_SOP%20pdf.pdf" download>Download</a></div></div>
+          </article>
+          <article class="card media-card" data-category="snacks">
+            <iframe class="media-preview" src="Chilli_Cheese_Grill_Sandwich_SOP%20pdf.pdf#view=FitH" title="Chilli Cheese Grill Sandwich SOP PDF"></iframe>
+            <div class="media-card-info"><span class="media-type">PDF</span><h3>Chilli Cheese Grill Sandwich SOP</h3><div class="media-actions"><a href="Chilli_Cheese_Grill_Sandwich_SOP%20pdf.pdf" target="_blank" rel="noopener">Open PDF</a><a href="Chilli_Cheese_Grill_Sandwich_SOP%20pdf.pdf" download>Download</a></div></div>
+          </article>
+          <article class="card media-card" data-category="snacks">
+            <iframe class="media-preview" src="Paneer_Cheese_Grill_Sandwich_SOP_One_Page%20pdf.pdf#view=FitH" title="Paneer Cheese Grill Sandwich SOP PDF"></iframe>
+            <div class="media-card-info"><span class="media-type">PDF</span><h3>Paneer Cheese Grill Sandwich SOP</h3><div class="media-actions"><a href="Paneer_Cheese_Grill_Sandwich_SOP_One_Page%20pdf.pdf" target="_blank" rel="noopener">Open PDF</a><a href="Paneer_Cheese_Grill_Sandwich_SOP_One_Page%20pdf.pdf" download>Download</a></div></div>
+          </article>
+          <article class="card media-card" data-category="counter">
+            <video class="media-preview" controls preload="metadata" src="Cashier%20Showroom%20Billing%20Process%20video.mp4"></video>
+            <div class="media-card-info"><span class="media-type">Video</span><h3>Cashier Showroom Billing Process</h3><div class="media-actions"><a href="Cashier%20Showroom%20Billing%20Process%20video.mp4" target="_blank" rel="noopener">Open video</a></div></div>
+          </article>
+          <article class="card media-card" data-category="counter">
+            <iframe class="media-preview" src="Counter%20Cleaniess%20%26%20Hygiene%20pdf.pdf#view=FitH" title="Counter Cleanliness and Hygiene PDF"></iframe>
+            <div class="media-card-info"><span class="media-type">PDF</span><h3>Counter Cleanliness &amp; Hygiene</h3><div class="media-actions"><a href="Counter%20Cleaniess%20%26%20Hygiene%20pdf.pdf" target="_blank" rel="noopener">Open PDF</a><a href="Counter%20Cleaniess%20%26%20Hygiene%20pdf.pdf" download>Download</a></div></div>
+          </article>
+          <article class="card media-card" data-category="counter">
+            <video class="media-preview" controls preload="metadata" src="Online%20Order%20Accepting%20and%20MRF%20video.mp4"></video>
+            <div class="media-card-info"><span class="media-type">Video</span><h3>Online Order Accepting and MRF</h3><div class="media-actions"><a href="Online%20Order%20Accepting%20and%20MRF%20video.mp4" target="_blank" rel="noopener">Open video</a></div></div>
+          </article>
+          <article class="card media-card" data-category="counter">
+            <video class="media-preview" controls preload="metadata" src="Inward%20%26%20Outward%20process%20video.mp4"></video>
+            <div class="media-card-info"><span class="media-type">Video</span><h3>Inward &amp; Outward Process</h3><div class="media-actions"><a href="Inward%20%26%20Outward%20process%20video.mp4" target="_blank" rel="noopener">Open video</a></div></div>
+          </article>
+          <article class="card media-card" data-category="sweets">
+            <video class="media-preview" controls preload="metadata" src="Rasmalai%20preparing%20Storing%20process%20and%20consuming%20video.mp4"></video>
+            <div class="media-card-info"><span class="media-type">Video</span><h3>Rasmalai Preparing, Storing and Consuming Process</h3><div class="media-actions"><a href="Rasmalai%20preparing%20Storing%20process%20and%20consuming%20video.mp4" target="_blank" rel="noopener">Open video</a></div></div>
+          </article>
+          <article class="card media-card" data-category="sweets">
+            <iframe class="media-preview" src="Rasmilai-%20ready%20Time%20update%20pdf.pdf#view=FitH" title="Rasmalai ready time update PDF"></iframe>
+            <div class="media-card-info"><span class="media-type">PDF</span><h3>Rasmalai Ready Time Update</h3><div class="media-actions"><a href="Rasmilai-%20ready%20Time%20update%20pdf.pdf" target="_blank" rel="noopener">Open PDF</a><a href="Rasmilai-%20ready%20Time%20update%20pdf.pdf" download>Download</a></div></div>
+          </article>
+          <article class="card media-card" data-category="bakery">
+            <video class="media-preview" controls preload="metadata" src="Packaging%20knowledge%20video.mp4"></video>
+            <div class="media-card-info"><span class="media-type">Video</span><h3>Packaging Knowledge</h3><div class="media-actions"><a href="Packaging%20knowledge%20video.mp4" target="_blank" rel="noopener">Open video</a></div></div>
+          </article>
+          <article class="card media-card" data-category="bakery">
+            <iframe class="media-preview" src="Packing%20Material%20Process%20pdf.pdf#view=FitH" title="Packing Material Process PDF"></iframe>
+            <div class="media-card-info"><span class="media-type">PDF</span><h3>Packing Material Process</h3><div class="media-actions"><a href="Packing%20Material%20Process%20pdf.pdf" target="_blank" rel="noopener">Open PDF</a><a href="Packing%20Material%20Process%20pdf.pdf" download>Download</a></div></div>
+          </article>
+        </div>
+        <div class="media-empty" id="mediaEmpty">No preview files are available for this department yet.</div>
+      </div>
 
       <!-- ================= TAB: MODULE 1 ================= -->
       <div id="tab-module1" class="tab-pane active">
@@ -1263,6 +1539,19 @@
   </main>
 
   <script>
+    function filterMedia(category, button) {
+      const cards = [...document.querySelectorAll('.media-card')];
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const show = category === 'all' || card.dataset.category === category;
+        card.hidden = !show;
+        if (show) visibleCount++;
+      });
+      document.querySelectorAll('.media-filter').forEach(filter => filter.classList.remove('active'));
+      button.classList.add('active');
+      document.getElementById('mediaEmpty').style.display = visibleCount ? 'none' : 'block';
+    }
+
     // Tab Switching Logic
     function switchTab(tabId, element) {
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
@@ -1335,6 +1624,35 @@
         alert(`Score: ${score}/${total} (${percentage}%). Minimum passing score is 75%. Please review Module 1 & 2 and try again!`);
       }
     }
+  </script>
+  <script type="module">
+    import vegGrillPdf from './Veg_Grill_Sandwich_SOP_One_Page pdf.pdf?url';
+    import cheeseCornPdf from './Cheese_Corn_Grilled_Sandwich_SOP pdf.pdf?url';
+    import chilliCheesePdf from './Chilli_Cheese_Grill_Sandwich_SOP pdf.pdf?url';
+    import paneerCheesePdf from './Paneer_Cheese_Grill_Sandwich_SOP_One_Page pdf.pdf?url';
+    import counterHygienePdf from './Counter Cleaniess & Hygiene pdf.pdf?url';
+    import rasmalaiReadyPdf from './Rasmilai- ready Time update pdf.pdf?url';
+    import packingMaterialPdf from './Packing Material Process pdf.pdf?url';
+
+    const pdfAssets = {
+      'Veg_Grill_Sandwich_SOP_One_Page pdf.pdf': vegGrillPdf,
+      'Cheese_Corn_Grilled_Sandwich_SOP pdf.pdf': cheeseCornPdf,
+      'Chilli_Cheese_Grill_Sandwich_SOP pdf.pdf': chilliCheesePdf,
+      'Paneer_Cheese_Grill_Sandwich_SOP_One_Page pdf.pdf': paneerCheesePdf,
+      'Counter Cleaniess & Hygiene pdf.pdf': counterHygienePdf,
+      'Rasmilai- ready Time update pdf.pdf': rasmalaiReadyPdf,
+      'Packing Material Process pdf.pdf': packingMaterialPdf
+    };
+
+    document.querySelectorAll('.media-card iframe').forEach(frame => {
+      const sourceName = decodeURIComponent(frame.getAttribute('src').split('#')[0]);
+      const bundledUrl = pdfAssets[sourceName];
+      if (!bundledUrl) return;
+      frame.src = `${bundledUrl}#view=FitH`;
+      frame.closest('.media-card').querySelectorAll('.media-actions a').forEach(link => {
+        link.href = bundledUrl;
+      });
+    });
   </script>
 </body>
 </html>
