@@ -495,6 +495,54 @@
       background: var(--primary);
       color: #FFF;
     }
+    .training-media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .training-media-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #FFF;
+      box-shadow: var(--shadow-sm);
+    }
+    .training-media-card video,
+    .training-media-card iframe {
+      width: 100%;
+      height: 190px;
+      border: 0;
+      background: #111413;
+    }
+    .training-media-card iframe {
+      background: #F1F5F9;
+    }
+    .training-media-info {
+      padding: 14px;
+    }
+    .training-media-info h4 {
+      margin: 4px 0 10px;
+      color: var(--primary-dark);
+    }
+    .training-media-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .training-media-actions a {
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .training-category {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
     /* ========================================================= */
     /* VIEW 4: VIDEO SCRIPT & MOTION STUDIO                     */
@@ -569,6 +617,336 @@
       max-width: 750px;
       margin: 20px auto;
       box-shadow: var(--shadow-md);
+    }
+
+    @media (max-width: 1024px) {
+      .app-mode-bar {
+        gap: 12px;
+        padding: 8px 16px;
+      }
+      .app-brand-tag {
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+      .mode-btn {
+        padding: 7px 10px;
+        font-size: 0.76rem;
+      }
+      .audio-pill,
+      .app-mode-bar > div:last-child > span {
+        display: none;
+      }
+      .hero-banner {
+        padding: 40px 24px;
+      }
+      .hero-grid {
+        gap: 24px;
+      }
+      .hero-title {
+        font-size: 2.55rem;
+      }
+      .category-pills {
+        overflow-x: auto;
+        max-width: 56vw;
+        scrollbar-width: none;
+      }
+      .category-pills::-webkit-scrollbar {
+        display: none;
+      }
+      .nav-container {
+        gap: 12px;
+      }
+      .lms-layout {
+        min-height: calc(100vh - 49px);
+      }
+      .lms-sidebar {
+        width: 240px;
+      }
+      .lms-main {
+        padding: 24px;
+      }
+      .scene-card {
+        grid-template-columns: 180px 1fr;
+      }
+      .scene-vo-box {
+        grid-column: 1 / -1;
+      }
+      .pos-main-grid {
+        grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.7fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow-x: hidden;
+      }
+      .app-mode-bar {
+        position: sticky;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        min-height: 58px;
+        padding: 7px 12px;
+      }
+      .app-brand-tag {
+        min-width: 0;
+        font-size: 0.76rem;
+        letter-spacing: 0.4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .app-mode-switchers {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+        border-radius: 10px;
+        justify-content: flex-start;
+      }
+      .app-mode-switchers::-webkit-scrollbar {
+        display: none;
+      }
+      .mode-btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+      .app-mode-bar > div:last-child {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      .storefront-nav {
+        top: 94px;
+      }
+      .nav-container {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding: 8px 12px;
+      }
+      .logo-badge {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+      .logo-text h1 {
+        font-size: 1.08rem;
+      }
+      .logo-text p {
+        font-size: 0.58rem;
+      }
+      .category-pills {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        max-width: none;
+        width: 100%;
+        order: 3;
+      }
+      .cat-btn {
+        flex: 0 0 auto;
+        padding: 7px 10px;
+        font-size: 0.78rem;
+        white-space: nowrap;
+      }
+      .nav-container > .btn-crimson {
+        padding: 8px 12px !important;
+        font-size: 0.78rem !important;
+        white-space: nowrap;
+      }
+      .hero-banner {
+        padding: 28px 16px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .hero-grid > div:last-child {
+        max-height: 260px;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+      .hero-grid > div:last-child img {
+        height: 260px;
+        object-fit: cover;
+      }
+      .hero-title {
+        font-size: 2.15rem;
+      }
+      .hero-desc {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+      }
+      .hero-cta-group {
+        flex-wrap: wrap;
+      }
+      .btn-crimson {
+        padding: 12px 20px;
+      }
+      .menu-section {
+        padding: 36px 16px;
+      }
+      .section-title-wrap {
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .section-title-wrap h2 {
+        font-size: 1.55rem;
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .food-card {
+        border-radius: 14px;
+      }
+      .pos-screen-wrap {
+        min-height: calc(100vh - 58px);
+        padding: 12px;
+      }
+      .pos-top-nav {
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+      }
+      .pos-top-nav::-webkit-scrollbar {
+        display: none;
+      }
+      .pos-top-nav > span {
+        display: none;
+      }
+      .pos-tab {
+        flex: 0 0 auto;
+      }
+      .pos-main-grid {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+      .pos-main-grid > div:first-child {
+        overflow-x: auto;
+      }
+      .pos-table {
+        min-width: 760px;
+      }
+      .pos-sidebar {
+        border-left: 0;
+        border-top: 1px solid #334155;
+      }
+      .lms-layout {
+        display: block;
+        min-height: calc(100vh - 58px);
+      }
+      .lms-sidebar {
+        width: 100%;
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding: 10px 12px;
+      }
+      .lms-sidebar h3,
+      .lms-sidebar > p {
+        display: none;
+      }
+      .lms-nav-link {
+        flex: 0 0 auto;
+        margin: 0;
+        white-space: nowrap;
+      }
+      .lms-main {
+        padding: 16px;
+      }
+      .lms-module-card {
+        padding: 18px;
+      }
+      .studio-wrap {
+        padding: 24px 12px;
+      }
+      .studio-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+        padding: 22px 18px;
+      }
+      .studio-header h2 {
+        font-size: 1.45rem !important;
+      }
+      .scene-card {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 18px;
+      }
+      .scene-vo-box {
+        grid-column: auto;
+      }
+      .cart-drawer {
+        width: min(420px, 92vw);
+      }
+      .cert-box {
+        padding: 24px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .app-brand-tag span:last-child {
+        max-width: 220px;
+      }
+      .mode-btn {
+        padding: 7px 9px;
+      }
+      .mode-btn span:first-child {
+        font-size: 1rem;
+      }
+      .nav-container {
+        padding-inline: 10px;
+      }
+      .logo-text p {
+        letter-spacing: 0.7px;
+      }
+      .hero-title {
+        font-size: 1.75rem;
+      }
+      .hero-cta-group {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .hero-cta-group .btn-crimson {
+        width: 100%;
+      }
+      .section-title-wrap {
+        flex-direction: column;
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .food-card-content {
+        padding: 12px;
+      }
+      .food-card h3 {
+        font-size: 0.96rem;
+        line-height: 1.35;
+      }
+      .food-card-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: 0.76rem;
+      }
+      .food-card-actions {
+        align-items: flex-end;
+        gap: 8px;
+      }
+      .food-price {
+        font-size: 1.05rem;
+      }
+      .add-cart-btn {
+        padding: 8px 10px;
+        font-size: 0.76rem;
+      }
+      .lms-main {
+        padding: 12px;
+      }
+      .lms-module-card {
+        padding: 14px;
+      }
     }
   </style>
 </head>
@@ -820,6 +1198,7 @@
         <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 6px;">ASHA ACADEMY</h3>
         <p style="font-size: 0.75rem; color: #94A3B8; margin-bottom: 20px;">Cashier & Hospitality Curriculum</p>
 
+        <a class="lms-nav-link" onclick="switchLmsLesson('media', this)">0. Training Media Library</a>
         <a class="lms-nav-link active" onclick="switchLmsLesson('m1', this)">1. Customer Handling (Namaste)</a>
         <a class="lms-nav-link" onclick="switchLmsLesson('m2', this)">2. LS POS Billing Precision</a>
         <a class="lms-nav-link" onclick="switchLmsLesson('m3', this)">3. Payment & Safe Handover</a>
@@ -1196,6 +1575,10 @@
     // ASHA ACADEMY LMS ENGINE
     // =========================================================
     const lmsModules = {
+      media: {
+        title: "Training Media Library",
+        content: ""
+      },
       m1: {
         title: "Module 1: Customer Handling (The 5 Golden Steps)",
         content: `
@@ -1314,7 +1697,7 @@
             <p style="text-transform: uppercase; letter-spacing: 3px; color: var(--gold); font-weight: 700; font-size: 0.85rem; margin-bottom: 20px;">Academy of Hospitality & Service Excellence</p>
             
             <p style="font-size: 0.9rem; color: var(--text-muted);">This is officially awarded to certify that</p>
-            <h2 style="font-size: 1.6rem; color: var(--text); border-bottom: 2px solid var(--gold); display: inline-block; padding: 4px 30px; margin: 8px 0 16px;">Rohan Kumar (Staff ID: 3133)</h2>
+            <h2 style="font-size: 1.6rem; color: var(--text); border-bottom: 2px solid var(--gold); display: inline-block; padding: 4px 30px; margin: 8px 0 16px;">MAYUR (Staff ID: 3133)</h2>
             <p style="font-size: 0.92rem; color: #475569; max-width: 580px; margin: 0 auto 24px; line-height: 1.6;">
               has demonstrated mastery in <strong>Customer Handling Standards, LS POS Billing Accuracy, Payment Protocol, UrbanPiper Fulfillment, and Conflict Resolution</strong> for Store ASC-024.
             </p>
@@ -1322,7 +1705,7 @@
               ✓ Score: 100% Distinction • Verified Certified Host
             </div>
             <div style="display: flex; justify-content: space-between; margin-top: 35px; padding-top: 15px; border-top: 1px dashed var(--border); font-size: 0.85rem;">
-              <div><strong>Kantha Mayya</strong><br><span style="color: var(--text-muted);">Head of Training</span></div>
+              <div><strong>Mayur</strong><br><span style="color: var(--text-muted);">Head of Training</span></div>
               <div><strong>15 Nov 2026</strong><br><span style="color: var(--text-muted);">Date of Issue</span></div>
               <div><strong>Malleswaram Flagship</strong><br><span style="color: var(--text-muted);">Asha Sweet Center</span></div>
             </div>
@@ -1342,7 +1725,8 @@
       }
       const data = lmsModules[key];
       if (data) {
-        document.getElementById('lmsContentBox').innerHTML = data.content;
+        document.getElementById('lmsContentBox').innerHTML =
+          key === 'media' ? buildTrainingLibrary() : data.content;
       }
     }
 
@@ -1436,6 +1820,79 @@
     // Initialize Default States
     renderProducts(products);
     switchLmsLesson('m1', null);
+  </script>
+  <script type="module">
+    const mediaFiles = import.meta.glob('/.github/**/*.{pdf,mp4}', {
+      eager: true,
+      query: '?url',
+      import: 'default'
+    });
+
+    window.trainingMediaAssets = Object.fromEntries(
+      Object.entries(mediaFiles).map(([path, url]) => [
+        path.split('/').pop(),
+        url
+      ])
+    );
+
+    function titleFromFile(filename) {
+      return filename
+        .replace(/\.(pdf|mp4)$/i, '')
+        .replace(/\b(1|2|3|4|5|6|7)\b/g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/\s*[()]+\s*/g, ' ')
+        .trim();
+    }
+
+    function categoryFromFile(filename) {
+      const name = filename.toLowerCase();
+      if (name.includes('chaat') || name.includes('thaw') || name.includes('vegetable')) return 'Chaats';
+      if (name.includes('milk') || name.includes('chilled') || name.includes('frozen')) return 'Milk & Frozen';
+      if (name.includes('rasmalai') || name.includes('mysore') || name.includes('kaju') || name.includes('balkwa') || name.includes('baki') || name.includes('bakl')) return 'Sweets';
+      if (name.includes('bakery') || name.includes('backery') || name.includes('packing') || name.includes('sandwich')) return 'Bakery & Packing';
+      if (name.includes('inward') || name.includes('inventory') || name.includes('item inwards') || name.includes('dispatch') || name.includes('return') || name.includes('sales')) return 'Operations';
+      if (name.includes('counter') || name.includes('billing') || name.includes('retail') || name.includes('estimate') || name.includes('online')) return 'Counter & Billing';
+      return 'Department SOP';
+    }
+
+    window.buildTrainingLibrary = function buildTrainingLibrary() {
+      const entries = Object.entries(window.trainingMediaAssets || {}).sort((a, b) => {
+        const aVideo = /\.mp4$/i.test(a[0]) ? 0 : 1;
+        const bVideo = /\.mp4$/i.test(b[0]) ? 0 : 1;
+        return aVideo - bVideo || a[0].localeCompare(b[0], undefined, { numeric: true });
+      });
+
+      const cards = entries.map(([filename, url]) => {
+        const isVideo = /\.mp4$/i.test(filename);
+        const preview = isVideo
+          ? `<video controls preload="metadata" src="${url}" title="${titleFromFile(filename)}"></video>`
+          : `<iframe title="${titleFromFile(filename)}" src="${url}#view=FitH"></iframe>`;
+        const type = isVideo ? 'Video' : 'PDF';
+        return `
+          <article class="training-media-card">
+            ${preview}
+            <div class="training-media-info">
+              <span class="training-category">${categoryFromFile(filename)} • ${type}</span>
+              <h4>${titleFromFile(filename)}</h4>
+              <div class="training-media-actions">
+                <a href="${url}" target="_blank" rel="noopener">Open ${type}</a>
+                ${isVideo ? '' : `<a href="${url}" download>Download PDF</a>`}
+              </div>
+            </div>
+          </article>`;
+      }).join('');
+
+      return `
+        <span style="color: var(--primary); font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">Sequenced Learning Resources</span>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--primary-dark); margin: 6px 0 8px;">
+          Training Media Library
+        </h2>
+        <p style="color: #64748B; margin-bottom: 18px;">
+          Videos are shown first, followed by department SOP PDFs. Open or download each resource in the displayed order.
+        </p>
+        <div class="training-media-grid">${cards}</div>
+      `;
+    };
   </script>
 </body>
 </html>

@@ -6,8 +6,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(process.cwd(), 'index.html'),
-        lms: resolve(process.cwd(), 'lms_portal.html')
+        main: resolve(process.cwd(), 'index.html')
       }
     }
   },
