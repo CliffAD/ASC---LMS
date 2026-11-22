@@ -960,21 +960,25 @@
     </div>
 
     <div class="app-mode-switchers">
-      <button class="mode-btn active" onclick="switchAppMode('storefront')">
+      <button class="mode-btn active" onclick="switchAppMode('storefront', this)">
         <span>🛍️</span>
         <span>Customer Storefront</span>
       </button>
-      <button class="mode-btn" onclick="switchAppMode('pos')">
+      <button class="mode-btn" onclick="switchAppMode('pos', this)">
         <span>🖥️</span>
         <span>POS & UrbanPiper Terminal</span>
       </button>
-      <button class="mode-btn" onclick="switchAppMode('lms')">
+      <button class="mode-btn" onclick="switchAppMode('lms', this)">
         <span>🎓</span>
         <span>Asha Academy LMS</span>
       </button>
-      <button class="mode-btn" onclick="switchAppMode('studio')">
+      <button class="mode-btn" onclick="switchAppMode('studio', this)">
         <span>🎬</span>
         <span>Video & Motion Studio</span>
+      </button>
+      <button class="mode-btn" onclick="openTrainingMedia(this)">
+        <span>📚</span>
+        <span>Training Media</span>
       </button>
     </div>
 
@@ -1198,7 +1202,7 @@
         <h3 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 6px;">ASHA ACADEMY</h3>
         <p style="font-size: 0.75rem; color: #94A3B8; margin-bottom: 20px;">Cashier & Hospitality Curriculum</p>
 
-        <a class="lms-nav-link" onclick="switchLmsLesson('media', this)">0. Training Media Library</a>
+        <a class="lms-nav-link" id="lmsMediaNav" onclick="switchLmsLesson('media', this)">0. Training Media Library</a>
         <a class="lms-nav-link active" onclick="switchLmsLesson('m1', this)">1. Customer Handling (Namaste)</a>
         <a class="lms-nav-link" onclick="switchLmsLesson('m2', this)">2. LS POS Billing Precision</a>
         <a class="lms-nav-link" onclick="switchLmsLesson('m3', this)">3. Payment & Safe Handover</a>
@@ -1419,13 +1423,18 @@
     let cart = [];
 
     // Mode Switcher
-    function switchAppMode(mode) {
+    function switchAppMode(mode, button) {
       playChime();
       document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.mode-btn').forEach(el => el.classList.remove('active'));
-      
+
       document.getElementById(`view-${mode}`).classList.add('active');
-      event.target.closest('.mode-btn').classList.add('active');
+      if (button) button.classList.add('active');
+    }
+
+    function openTrainingMedia(button) {
+      switchAppMode('lms', button);
+      switchLmsLesson('media', document.getElementById('lmsMediaNav'));
     }
 
     // Render Product Cards
