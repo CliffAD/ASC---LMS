@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#201a17">
+  <title>Asha Sweets Center — Customer Journey Motion Preview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #171412;
+      color: #fffaf1;
+      font-synthesis: none;
+      --gold: #e8ba70;
+      --cream: #fff4dc;
+      --muted: #b7aaa0;
+      --panel: #241e1a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(128, 69, 37, .22), transparent 55%),
+        #171412;
+    }
+
+    button, input { font: inherit; }
+    button { color: inherit; }
+
+    .studio {
+      width: min(1240px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 34px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 500;
+      letter-spacing: -.025em;
+    }
+
+    .runtime {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player {
+      overflow: hidden;
+      border: 1px solid rgba(255, 244, 220, .16);
+      border-radius: 14px;
+      background: #0e0b0a;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .45);
+    }
+
+    .screen {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: #d78b51;
+    }
+
+    .screen svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .shot {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .65s ease, visibility .65s;
+    }
+
+    .shot.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .shot.is-active .enter {
+      animation: enter .75s cubic-bezier(.2, .75, .25, 1) both;
+    }
+
+    .shot.is-active .enter-late {
+      animation: enter .75s .25s cubic-bezier(.2, .75, .25, 1) both;
+    }
+
+    .shot.is-active .float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .shot.is-active .glow {
+      animation: glow 2.8s ease-in-out infinite alternate;
+    }
+
+    .shot.is-active .walk-in {
+      animation: walk-in 2.4s .35s cubic-bezier(.2, .75, .25, 1) both;
+    }
+
+    .shot.is-active .bow {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: bow .8s .9s cubic-bezier(.2, .8, .2, 1.4) both;
+    }
+
+    .shot.is-active .check {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pop .45s .2s cubic-bezier(.2, .8, .2, 1.5) both;
+    }
+
+    .shot.is-active .scale-needle {
+      transform-box: fill-box;
+      transform-origin: 12% 50%;
+      animation: needle 1.1s .35s ease-out both;
+    }
+
+    .scene-vignette {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 7, 5, .08), transparent 28%, transparent 68%, rgba(10, 7, 5, .2));
+    }
+
+    .caption {
+      position: absolute;
+      z-index: 2;
+      right: 7%;
+      bottom: 7%;
+      left: 7%;
+      display: flex;
+      min-height: 64px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      background: rgba(18, 13, 10, .78);
+      color: #fffdf8;
+      text-align: center;
+      text-shadow: 0 1px 3px #000;
+      backdrop-filter: blur(7px);
+    }
+
+    .caption-copy { max-width: 920px; }
+
+    .speaker {
+      display: block;
+      margin-bottom: 3px;
+      color: #f0c77e;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .caption-text {
+      font-size: clamp(13px, 1.65vw, 19px);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .status {
+      position: absolute;
+      z-index: 3;
+      top: 18px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #fff9ed;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, .65);
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #e8ba70;
+      box-shadow: 0 0 12px #ffd487;
+    }
+
+    .timeline {
+      height: 4px;
+      background: #40332b;
+    }
+
+    .timeline-fill {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, #ba713d, #f1cf8a);
+    }
+
+    .transport {
+      display: grid;
+      grid-template-columns: auto auto minmax(100px, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: #211b17;
+    }
+
+    .control {
+      min-width: 82px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255, 244, 220, .18);
+      border-radius: 6px;
+      background: #332820;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background .2s, border-color .2s;
+    }
+
+    .control:hover, .control[aria-pressed="true"] {
+      border-color: rgba(232, 186, 112, .65);
+      background: #4a3525;
+    }
+
+    .seek {
+      width: 100%;
+      accent-color: #e8ba70;
+      cursor: pointer;
+    }
+
+    .clock {
+      min-width: 86px;
+      color: #ddd0c5;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+
+    .scene-nav {
+      display: flex;
+      gap: 7px;
+      margin-top: 12px;
+      overflow-x: auto;
+      padding: 2px 0 8px;
+      scrollbar-color: #614631 transparent;
+    }
+
+    .scene-button {
+      flex: 1 0 112px;
+      min-height: 50px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 244, 220, .11);
+      border-radius: 7px;
+      background: #211b17;
+      color: #c1b4a9;
+      cursor: pointer;
+      text-align: left;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+
+    .scene-button span {
+      display: block;
+      margin-bottom: 3px;
+      color: #8e7c6f;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .scene-button strong { font-size: 12px; }
+
+    .scene-button.is-current {
+      border-color: rgba(232, 186, 112, .7);
+      background: #3a2a1e;
+      color: #fff4dc;
+    }
+
+    .scene-button.is-current span { color: #e8ba70; }
+
+    .production-note {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 12px 2px 0;
+      color: #aa9d92;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .production-note strong { color: #d9c8b7; }
+
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(18px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes glow {
+      from { opacity: .7; filter: drop-shadow(0 0 3px rgba(255, 198, 102, .3)); }
+      to { opacity: 1; filter: drop-shadow(0 0 13px rgba(255, 198, 102, .9)); }
+    }
+
+    @keyframes walk-in {
+      from { opacity: 0; transform: translateX(90px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes bow {
+      from { opacity: 0; transform: scale(.2) rotate(-20deg); }
+      to { opacity: 1; transform: scale(1) rotate(0); }
+    }
+
+    @keyframes pop {
+      from { opacity: 0; transform: scale(.15); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes needle {
+      from { transform: rotate(-18deg); }
+      to { transform: rotate(0); }
+    }
+
+    @media (max-width: 640px) {
+      .studio { width: min(100% - 20px, 1240px); padding-top: 18px; }
+      .masthead { align-items: flex-start; }
+      .runtime { padding-top: 5px; font-size: 11px; }
+      .status { top: 9px; left: 10px; font-size: 9px; }
+      .caption { right: 4%; bottom: 5%; left: 4%; min-height: 45px; padding: 7px 10px; }
+      .speaker { margin-bottom: 1px; font-size: 9px; }
+      .transport { grid-template-columns: auto auto minmax(50px, 1fr); gap: 8px; padding: 10px; }
+      .control { min-width: 0; padding: 8px 10px; font-size: 11px; }
+      .clock { grid-column: 3; min-width: 0; margin-top: -6px; font-size: 10px; }
+      .production-note { flex-direction: column; gap: 4px; font-size: 11px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="studio">
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">Asha Sweets Center · Motion graphics preview</p>
+        <h1>A sweet visit, from hello to goodbye.</h1>
+      </div>
+      <div class="runtime">16:9 · 1:30</div>
+    </header>
+
+    <section class="player" aria-label="Animated customer journey preview">
+      <div class="screen" id="screen">
+        <svg id="film" viewBox="0 0 1280 720" role="img" aria-labelledby="film-title film-desc" preserveAspectRatio="xMidYMid slice">
+          <title id="film-title">Asha Sweets Center customer journey</title>
+          <desc id="film-desc">Seven animated scenes show a customer greeting, choosing sweets, packing a gift, paying, and leaving.</desc>
+          <defs>
+            <linearGradient id="sunset" x2="0" y2="1">
+              <stop stop-color="#f8c783"/>
+              <stop offset="1" stop-color="#c96f4a"/>
+            </linearGradient>
+            <linearGradient id="interior" x2="0" y2="1">
+              <stop stop-color="#f5d9ad"/>
+              <stop offset="1" stop-color="#b97549"/>
+            </linearGradient>
+            <linearGradient id="shopGlass" x2="0" y2="1">
+              <stop stop-color="#fff3d4" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#d47a41" stop-opacity=".75"/>
+            </linearGradient>
+            <linearGradient id="gift" x2="1" y2="1">
+              <stop stop-color="#fffdf5"/>
+              <stop offset="1" stop-color="#eadcc6"/>
+            </linearGradient>
+            <linearGradient id="endcard" x2="1" y2="1">
+              <stop stop-color="#8e3d2c"/>
+              <stop offset=".55" stop-color="#421f1c"/>
+              <stop offset="1" stop-color="#1b1715"/>
+            </linearGradient>
+            <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="9" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <pattern id="counterLines" width="32" height="32" patternUnits="userSpaceOnUse">
+              <path d="M0 31.5H32" stroke="#fff" stroke-opacity=".08"/>
+            </pattern>
+            <g id="staffCharacter">
+              <ellipse cx="0" cy="0" rx="45" ry="9" fill="#573620" opacity=".18"/>
+              <path d="M-31-8Q-37-64-23-95Q0-112 23-95Q38-62 31-8Z" fill="#8f2730"/>
+              <path d="M-17-12V-68L0-50L17-68V-12Z" fill="#fff3dd"/>
+              <path d="M-29-92Q-28-126 0-126Q29-126 30-92L23-76Q0-89-23-76Z" fill="#33221b"/>
+              <ellipse cx="0" cy="-86" rx="24" ry="30" fill="#c8875b"/>
+              <path d="M-23-96Q-16-122 5-116Q21-113 25-97L19-91Q5-104-18-91Z" fill="#302019"/>
+              <circle cx="-8" cy="-87" r="2" fill="#342019"/>
+              <circle cx="8" cy="-87" r="2" fill="#342019"/>
+              <path d="M-6-75Q0-70 7-75" fill="none" stroke="#7b392d" stroke-width="2" stroke-linecap="round"/>
+              <path d="M-31-66Q-49-46-53-20M31-66Q48-47 50-25" fill="none" stroke="#c8875b" stroke-width="12" stroke-linecap="round"/>
+            </g>
+            <g id="customerCharacter">
+              <ellipse cx="0" cy="0" rx="46" ry="9" fill="#573620" opacity=".18"/>
+              <path d="M-32-8Q-39-62-23-93Q0-111 24-93Q38-60 31-8Z" fill="#245466"/>
+              <path d="M-30-93Q-27-124 0-124Q30-124 31-92L23-78Q0-86-23-78Z" fill="#30231e"/>
+              <ellipse cx="0" cy="-85" rx="24" ry="30" fill="#d79a6f"/>
+              <path d="M-23-96Q-17-121 2-115Q19-113 25-95L18-90Q7-103-17-90Z" fill="#30231e"/>
+              <circle cx="-8" cy="-86" r="2" fill="#342019"/>
+              <circle cx="8" cy="-86" r="2" fill="#342019"/>
+              <path d="M-7-74Q0-68 8-75" fill="none" stroke="#813e2e" stroke-width="2" stroke-linecap="round"/>
+              <path d="M-31-66Q-48-47-51-23M31-66Q48-47 50-24" fill="none" stroke="#d79a6f" stroke-width="12" stroke-linecap="round"/>
+            </g>
+          </defs>
+
+          <g class="shot is-active" data-shot="0">
+            <rect width="1280" height="720" fill="url(#sunset)"/>
+            <circle cx="1035" cy="132" r="72" fill="#ffe5ae" opacity=".78"/>
+            <path d="M0 365L120 264L222 352L339 244L467 360L594 276L713 360L826 282L941 367L1056 260L1179 363L1280 295V550H0Z" fill="#a5533d" opacity=".38"/>
+            <rect y="490" width="1280" height="230" fill="#51362f"/>
+            <path d="M55 240L640 100L1225 240V635H55Z" fill="#873d2e" class="enter"/>
+            <path d="M55 240L640 100L1225 240Z" fill="#f3d09a"/>
+            <path d="M55 240L640 100L1225 240" fill="none" stroke="#fff0d3" stroke-width="13"/>
+            <rect x="113" y="258" width="1054" height="96" rx="8" fill="#321d1a" stroke="#e8ba70" stroke-width="5"/>
+            <text x="640" y="322" text-anchor="middle" fill="#ffe0a2" font-size="54" font-family="Georgia,serif" letter-spacing="8" class="glow">ASHA SWEETS CENTER</text>
+            <rect x="120" y="375" width="476" height="250" rx="6" fill="url(#shopGlass)" stroke="#fff0d0" stroke-width="8"/>
+            <rect x="684" y="375" width="476" height="250" rx="6" fill="url(#shopGlass)" stroke="#fff0d0" stroke-width="8"/>
+            <path d="M129 492H588M693 492H1151" stroke="#8f4c31" stroke-width="9"/>
+            <g fill="#e6a14b">
+              <circle cx="179" cy="472" r="16"/><circle cx="228" cy="470" r="16"/><circle cx="277" cy="471" r="16"/>
+              <circle cx="739" cy="471" r="16"/><circle cx="789" cy="470" r="16"/><circle cx="839" cy="472" r="16"/>
+            </g>
+            <g fill="#f7d88e">
+              <circle cx="332" cy="470" r="15"/><circle cx="382" cy="470" r="15"/><circle cx="432" cy="470" r="15"/>
+              <circle cx="891" cy="470" r="15"/><circle cx="942" cy="470" r="15"/><circle cx="993" cy="470" r="15"/>
+            </g>
+            <g class="walk-in" transform="translate(1040 615)">
+              <use href="#customerCharacter"/>
+            </g>
+            <path d="M1002 622H1190" stroke="#f4c584" stroke-opacity=".55" stroke-width="4" stroke-dasharray="9 12"/>
+            <text x="640" y="680" text-anchor="middle" fill="#ffe6bf" font-size="20" font-family="Georgia,serif" letter-spacing="3">FRESH EVERY DAY · SHARED WITH LOVE</text>
+          </g>
+
+          <g class="shot" data-shot="1">
+            <rect width="1280" height="720" fill="url(#interior)"/>
+            <path d="M0 0H1280V422Q640 465 0 422Z" fill="#f6ddb5"/>
+            <path d="M90 0V382M1190 0V382" stroke="#bd8658" stroke-opacity=".22" stroke-width="4"/>
+            <circle cx="180" cy="118" r="35" fill="#ffd98e" opacity=".35" filter="url(#softGlow)"/>
+            <circle cx="1100" cy="118" r="35" fill="#ffd98e" opacity=".35" filter="url(#softGlow)"/>
+            <path d="M0 474Q640 420 1280 474V720H0Z" fill="#70402d"/>
+            <path d="M0 500Q640 446 1280 500V720H0Z" fill="url(#counterLines)"/>
+            <rect x="90" y="338" width="1100" height="115" rx="15" fill="#6d3628" stroke="#e8ba70" stroke-width="6"/>
+            <path d="M110 358H1170V445H110Z" fill="#88472e"/>
+            <g transform="translate(350 470)"><use href="#staffCharacter"/></g>
+            <g transform="translate(930 470)"><use href="#customerCharacter"/></g>
+            <g class="enter-late" transform="translate(650 418)">
+              <rect x="-45" y="-6" width="90" height="14" rx="5" fill="#fff8e9"/>
+              <path d="M0-12V-4" stroke="#e8ba70" stroke-width="3"/>
+            </g>
+            <path d="M420 370Q486 348 545 370" fill="none" stroke="#fff2d6" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+            <circle cx="485" cy="354" r="6" fill="#fff2d6" class="float"/>
+            <circle cx="505" cy="347" r="4" fill="#fff2d6" class="float"/>
+            <rect x="150" y="85" width="320" height="60" rx="30" fill="#8d422f"/>
+            <text x="310" y="125" text-anchor="middle" fill="#fff1d2" font-size="25" font-family="Georgia,serif" letter-spacing="2">NAMASTE</text>
+          </g>
+
+          <g class="shot" data-shot="2">
+            <rect width="1280" height="720" fill="#eed4ad"/>
+            <path d="M0 0H1280V190H0Z" fill="#f6e5c7"/>
+            <text x="640" y="78" text-anchor="middle" fill="#8a4932" font-size="22" font-family="Arial,sans-serif" letter-spacing="6">FRESHLY MADE THIS MORNING</text>
+            <ellipse cx="640" cy="410" rx="480" ry="225" fill="#9c5e3a"/>
+            <ellipse cx="640" cy="390" rx="450" ry="205" fill="#f8e9cc" stroke="#fff8e8" stroke-width="10"/>
+            <ellipse cx="640" cy="396" rx="405" ry="165" fill="#ddb27c"/>
+            <g class="enter">
+              <g fill="#f1d795" stroke="#d29b53" stroke-width="4">
+                <rect x="290" y="305" width="115" height="78" rx="9" transform="rotate(-12 347 344)"/>
+                <rect x="430" y="273" width="115" height="78" rx="9" transform="rotate(8 487 312)"/>
+                <rect x="575" y="280" width="115" height="78" rx="9" transform="rotate(-5 632 319)"/>
+                <rect x="720" y="276" width="115" height="78" rx="9" transform="rotate(9 777 315)"/>
+                <rect x="866" y="310" width="115" height="78" rx="9" transform="rotate(-9 923 349)"/>
+                <rect x="350" y="416" width="115" height="78" rx="9" transform="rotate(7 407 455)"/>
+                <rect x="500" y="408" width="115" height="78" rx="9" transform="rotate(-8 557 447)"/>
+                <rect x="660" y="410" width="115" height="78" rx="9" transform="rotate(5 717 449)"/>
+                <rect x="810" y="416" width="115" height="78" rx="9" transform="rotate(-5 867 455)"/>
+              </g>
+              <g fill="#fff0c3">
+                <circle cx="345" cy="342" r="6"/><circle cx="485" cy="312" r="6"/><circle cx="632" cy="319" r="6"/>
+                <circle cx="778" cy="315" r="6"/><circle cx="923" cy="349" r="6"/>
+              </g>
+            </g>
+            <g class="enter-late">
+              <ellipse cx="640" cy="568" rx="100" ry="29" fill="#fff8e8" stroke="#c9a578" stroke-width="5"/>
+              <path d="M591 548L640 524L689 548L640 574Z" fill="#f2d284" stroke="#d09c52" stroke-width="4"/>
+              <circle cx="640" cy="547" r="17" fill="#e9c36c"/>
+              <path d="M632 542L640 536L648 542L640 551Z" fill="#fff4d7"/>
+            </g>
+            <text x="640" y="670" text-anchor="middle" fill="#74432e" font-size="19" font-family="Georgia,serif" letter-spacing="3">A LITTLE TASTE, A LOT OF LOVE</text>
+          </g>
+
+          <g class="shot" data-shot="3">
+            <rect width="1280" height="720" fill="#e7c6a0"/>
+            <path d="M0 0H1280V520H0Z" fill="#f1dfc2"/>
+            <rect x="105" y="450" width="1070" height="195" rx="18" fill="#81503a"/>
+            <path d="M105 470H1175V645H105Z" fill="url(#counterLines)"/>
+            <g transform="translate(245 420)">
+              <rect x="-106" y="-90" width="212" height="92" rx="15" fill="#3b3028" stroke="#b48b60" stroke-width="8"/>
+              <rect x="-78" y="-70" width="156" height="48" rx="8" fill="#d5efbd"/>
+              <text x="0" y="-37" text-anchor="middle" fill="#365235" font-size="34" font-family="monospace" font-weight="700">0.500 kg</text>
+              <path d="M-132 0H132L102 74H-102Z" fill="#d4d0c8" stroke="#8e877b" stroke-width="6"/>
+              <path d="M-132 0L0-25L132 0" fill="#f3eee3" stroke="#a9a194" stroke-width="5"/>
+            </g>
+            <g class="enter-late" transform="translate(765 365)">
+              <path d="M-148 12L-132-105H132L148 12L126 212H-126Z" fill="url(#gift)" stroke="#d5c1a4" stroke-width="7"/>
+              <path d="M-135-80H135V-7H-135Z" fill="#fffdf7"/>
+              <path d="M-12-103V209M-133-25H134" stroke="#9e2934" stroke-width="24"/>
+              <path d="M-12-103V209M-133-25H134" stroke="#c44748" stroke-width="8"/>
+              <g class="bow">
+                <path d="M0-104C-95-184-152-111-77-69L0-35C-54-102-35-120 0-104Z" fill="#b2313a" stroke="#7c2028" stroke-width="5"/>
+                <path d="M0-104C95-184 152-111 77-69L0-35C54-102 35-120 0-104Z" fill="#cc4b4d" stroke="#7c2028" stroke-width="5"/>
+                <circle cy="-88" r="17" fill="#e57469"/>
+              </g>
+            </g>
+            <text x="640" y="688" text-anchor="middle" fill="#fff0d6" font-size="18" font-family="Arial,sans-serif" letter-spacing="4">CAREFULLY PACKED · READY TO GIFT</text>
+          </g>
+
+          <g class="shot" data-shot="4">
+            <rect width="1280" height="720" fill="#ddc3a0"/>
+            <path d="M0 0H1280V405H0Z" fill="#f0ddbd"/>
+            <path d="M0 417Q640 382 1280 417V720H0Z" fill="#78452f"/>
+            <path d="M0 450Q640 415 1280 450V720H0Z" fill="url(#counterLines)"/>
+            <g transform="translate(372 380)">
+              <rect x="-176" y="-154" width="352" height="250" rx="20" fill="#302a25" stroke="#a68864" stroke-width="8"/>
+              <rect x="-144" y="-123" width="288" height="118" rx="10" fill="#e9e5d7"/>
+              <text x="0" y="-80" text-anchor="middle" fill="#675a4b" font-size="19" font-family="Arial,sans-serif" letter-spacing="2">ASHASWEETS · DEMO POS</text>
+              <text x="0" y="-27" text-anchor="middle" fill="#76502e" font-size="36" font-family="monospace" font-weight="700">TOTAL  ₹850</text>
+              <rect x="-130" y="8" width="260" height="54" rx="8" fill="#493a30"/>
+              <text x="0" y="43" text-anchor="middle" fill="#f2d59b" font-size="22" font-family="Arial,sans-serif">Kaju Katli  ·  0.5 kg</text>
+            </g>
+            <g transform="translate(902 354)">
+              <rect x="-175" y="-158" width="350" height="270" rx="18" fill="#211e1a" stroke="#9c8162" stroke-width="8"/>
+              <rect x="-146" y="-130" width="292" height="200" rx="10" fill="#fffaf0"/>
+              <text x="0" y="-94" text-anchor="middle" fill="#65442e" font-size="19" font-family="Arial,sans-serif" font-weight="700">SCAN TO PAY · DEMO</text>
+              <rect x="-81" y="-70" width="162" height="126" rx="4" fill="#fff" stroke="#d1c5b3" stroke-width="4"/>
+              <g fill="#211d19">
+                <path d="M-67-57h44v44h-44zM23-57h44v44H23zM-67 13h44v43h-44z"/>
+                <path d="M-12-57h15v15h-15zM7-38h14v14H7zM-11-18h14v14h-14zM13 1h14v14H13zM-10 26h15v15h-15zM27 27h15v15H27z"/>
+              </g>
+              <path d="M-54-44h18v18h-18zM36-44h18v18H36zM-54 25h18v17h-18z" fill="#fff"/>
+              <g class="check">
+                <circle cx="84" cy="49" r="38" fill="#357a51" stroke="#eaffee" stroke-width="6"/>
+                <path d="M65 49L79 64L105 33" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </g>
+            <rect x="392" y="575" width="496" height="56" rx="28" fill="#f5e8d2" stroke="#d0b38b" stroke-width="3"/>
+            <text x="640" y="611" text-anchor="middle" fill="#65442e" font-size="24" font-family="Arial,sans-serif" font-weight="700">UPI PAYMENT · SUCCESSFUL</text>
+          </g>
+
+          <g class="shot" data-shot="5">
+            <rect width="1280" height="720" fill="url(#sunset)"/>
+            <circle cx="1000" cy="130" r="74" fill="#ffe5ae" opacity=".72"/>
+            <path d="M0 410L160 279L298 410L430 284L584 410L745 280L914 410L1050 292L1210 410L1280 350V550H0Z" fill="#a5533d" opacity=".32"/>
+            <rect y="510" width="1280" height="210" fill="#573a30"/>
+            <path d="M60 224L640 104L1220 224V635H60Z" fill="#803e2e"/>
+            <path d="M60 224L640 104L1220 224" fill="none" stroke="#ffedce" stroke-width="12"/>
+            <rect x="110" y="248" width="1060" height="74" rx="7" fill="#301b19" stroke="#e8ba70" stroke-width="5"/>
+            <text x="640" y="300" text-anchor="middle" fill="#ffe0a2" font-size="42" font-family="Georgia,serif" letter-spacing="7">ASHA SWEETS CENTER</text>
+            <rect x="110" y="350" width="1060" height="270" rx="10" fill="url(#shopGlass)" stroke="#fff0d0" stroke-width="9"/>
+            <path d="M640 354V619" stroke="#fff0d0" stroke-width="8"/>
+            <path d="M124 491H1158" stroke="#9e5633" stroke-width="10"/>
+            <g fill="#eab45f">
+              <circle cx="220" cy="467" r="18"/><circle cx="280" cy="467" r="18"/><circle cx="340" cy="467" r="18"/>
+              <circle cx="700" cy="467" r="18"/><circle cx="760" cy="467" r="18"/><circle cx="820" cy="467" r="18"/>
+            </g>
+            <g class="enter" transform="translate(345 617)"><use href="#staffCharacter"/></g>
+            <g class="enter-late" transform="translate(845 617)">
+              <use href="#customerCharacter"/>
+              <g transform="translate(66 -10)">
+                <path d="M-38-20L-35-105H35L38-20L29 37H-29Z" fill="#fff7e6" stroke="#d9c2a0" stroke-width="5"/>
+                <path d="M-8-104V35" stroke="#aa3038" stroke-width="11"/>
+                <path d="M-28-26H28" stroke="#aa3038" stroke-width="11"/>
+                <path d="M-8-105C-39-139-68-110-28-88M-8-105C25-139 54-110 12-88" fill="none" stroke="#c64b49" stroke-width="10" stroke-linecap="round"/>
+              </g>
+            </g>
+            <text x="640" y="685" text-anchor="middle" fill="#ffe6bf" font-size="20" font-family="Georgia,serif" letter-spacing="3">THANK YOU FOR SHARING THE SWEETNESS</text>
+          </g>
+
+          <g class="shot" data-shot="6">
+            <rect width="1280" height="720" fill="url(#endcard)"/>
+            <circle cx="640" cy="338" r="214" fill="none" stroke="#e8ba70" stroke-opacity=".25" stroke-width="2" class="glow"/>
+            <circle cx="640" cy="338" r="182" fill="none" stroke="#e8ba70" stroke-opacity=".48" stroke-width="1"/>
+            <g class="enter">
+              <path d="M640 196L657 249L713 249L668 283L685 337L640 304L595 337L612 283L567 249L623 249Z" fill="#e8ba70"/>
+              <text x="640" y="405" text-anchor="middle" fill="#fff0d2" font-size="54" font-family="Georgia,serif" letter-spacing="8">ASHA SWEETS</text>
+              <path d="M410 430H870" stroke="#e8ba70" stroke-width="2"/>
+              <text x="640" y="486" text-anchor="middle" fill="#f6d69d" font-size="28" font-family="Georgia,serif" letter-spacing="2">Sweetness, Shared.</text>
+              <text x="640" y="560" text-anchor="middle" fill="#fff0d2" font-size="19" font-family="Arial,sans-serif" letter-spacing="1">Thank you for your visit.</text>
+            </g>
+            <g fill="#f7d696" opacity=".55">
+              <circle cx="285" cy="165" r="3" class="float"/><circle cx="1002" cy="222" r="4" class="float"/>
+              <circle cx="310" cy="527" r="4" class="float"/><circle cx="965" cy="526" r="3" class="float"/>
+              <circle cx="855" cy="144" r="3" class="float"/><circle cx="432" cy="608" r="3" class="float"/>
+            </g>
+          </g>
+        </svg>
+        <div class="scene-vignette"></div>
+        <div class="status"><span class="status-dot"></span><span id="scene-label">Scene 1 · Storefront</span></div>
+        <div class="caption" aria-live="polite">
+          <div class="caption-copy">
+            <span class="speaker" id="speaker"></span>
+            <span class="caption-text" id="caption"></span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline" aria-hidden="true"><div class="timeline-fill" id="timeline-fill"></div></div>
+      <div class="transport">
+        <button class="control" id="play" type="button" aria-label="Play preview">▶ Play</button>
+        <button class="control" id="restart" type="button" aria-label="Restart preview">↺ Restart</button>
+        <input class="seek" id="seek" type="range" min="0" max="90" step=".1" value="0" aria-label="Seek through video">
+        <output class="clock" id="clock">0:00 / 1:30</output>
+      </div>
+    </section>
+
+    <nav class="scene-nav" id="scene-nav" aria-label="Jump to scene"></nav>
+    <div class="production-note">
+      <span><strong>Preview:</strong> original vector motion graphics, English captions, scene-by-scene seeking.</span>
+      <span>Voiceover, music, logo, and final video export are separate finishing steps.</span>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const scenes = [
+        {
+          title: "Storefront", duration: 8,
+          cues: [{ at: 0, speaker: "Voiceover", text: "Welcome to Asha Sweets Center, where every sweet is made fresh, every day." }]
+        },
+        {
+          title: "Greeting", duration: 12,
+          cues: [
+            { at: 0, speaker: "Staff", text: "Namaste! Welcome to Asha Sweets. What can I get for you today?" },
+            { at: 6, speaker: "Customer", text: "Hi! I'd like a box of kaju katli, and maybe a couple of laddoos." }
+          ]
+        },
+        {
+          title: "Choosing sweets", duration: 15,
+          cues: [
+            { at: 0, speaker: "Staff", text: "Our kaju katli was made this morning. Would you like to try a piece first?" },
+            { at: 6, speaker: "Customer", text: "Oh, that's perfect. Let's do half a kilo." },
+            { at: 10, speaker: "Staff", text: "Lovely choice. And the laddoos are right here, fresh today." }
+          ]
+        },
+        {
+          title: "Weighing & packing", duration: 15,
+          cues: [
+            { at: 0, speaker: "Staff", text: "Half a kilo, freshly packed. Would you like it gift-wrapped?" },
+            { at: 6, speaker: "Customer", text: "Yes, please. It's a gift." },
+            { at: 9, speaker: "Staff", text: "Wonderful. We'll make it look special." }
+          ]
+        },
+        {
+          title: "Billing", duration: 20,
+          cues: [
+            { at: 0, speaker: "Staff", text: "Your total comes to 850 rupees. How would you like to pay: card, UPI, or cash?" },
+            { at: 7, speaker: "Customer", text: "UPI, please." },
+            { at: 9, speaker: "Staff", text: "Great. Just scan this QR code." },
+            { at: 12, speaker: "Staff", text: "Payment received. Here's your bill. You can also get a copy on WhatsApp if you'd like." }
+          ]
+        },
+        {
+          title: "Thank you & farewell", duration: 15,
+          cues: [
+            { at: 0, speaker: "Staff", text: "Thank you for choosing Asha Sweets. Enjoy, and we'll see you again soon!" },
+            { at: 8, speaker: "Customer", text: "Thank you, Asha! Everything was wonderful." }
+          ]
+        },
+        {
+          title: "Closing card", duration: 5,
+          cues: [{ at: 0, speaker: "Voiceover", text: "Asha Sweets Center. Thank you for your visit." }]
+        }
+      ];
+
+      const starts = [];
+      let totalDuration = 0;
+      scenes.forEach(scene => {
+        starts.push(totalDuration);
+        totalDuration += scene.duration;
+      });
+
+      const film = document.getElementById("film");
+      const shotElements = [...film.querySelectorAll("[data-shot]")];
+      const buttons = document.getElementById("scene-nav");
+      const playButton = document.getElementById("play");
+      const seek = document.getElementById("seek");
+      const clock = document.getElementById("clock");
+      const caption = document.getElementById("caption");
+      const speaker = document.getElementById("speaker");
+      const sceneLabel = document.getElementById("scene-label");
+      const timelineFill = document.getElementById("timeline-fill");
+
+      let currentTime = 0;
+      let activeScene = -1;
+      let playing = false;
+      let lastFrame = 0;
+      let animationFrame = 0;
+
+      const timeText = seconds => {
+        const whole = Math.floor(seconds);
+        return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
+      };
+
+      scenes.forEach((scene, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "scene-button";
+        button.innerHTML = `<span>Scene ${index + 1} · ${timeText(starts[index])}</span><strong>${scene.title}</strong>`;
+        button.addEventListener("click", () => {
+          pause();
+          setTime(starts[index]);
+        });
+        buttons.append(button);
+      });
+
+      function sceneAt(seconds) {
+        for (let index = scenes.length - 1; index >= 0; index -= 1) {
+          if (seconds >= starts[index]) return index;
+        }
+        return 0;
+      }
+
+      function setTime(seconds) {
+        currentTime = Math.max(0, Math.min(totalDuration, seconds));
+        const index = sceneAt(Math.min(currentTime, totalDuration - .001));
+        const localTime = currentTime - starts[index];
+
+        if (index !== activeScene) {
+          activeScene = index;
+          shotElements.forEach((shot, shotIndex) => shot.classList.toggle("is-active", shotIndex === index));
+          [...buttons.children].forEach((button, buttonIndex) => button.classList.toggle("is-current", buttonIndex === index));
+          sceneLabel.textContent = `Scene ${index + 1} · ${scenes[index].title}`;
+        }
+
+        let cue = scenes[index].cues[0];
+        scenes[index].cues.forEach(item => {
+          if (localTime >= item.at) cue = item;
+        });
+        speaker.textContent = cue.speaker;
+        caption.textContent = cue.text;
+        seek.value = currentTime;
+        clock.textContent = `${timeText(currentTime)} / ${timeText(totalDuration)}`;
+        timelineFill.style.width = `${(currentTime / totalDuration) * 100}%`;
+      }
+
+      function tick(now) {
+        if (!playing) return;
+        if (!lastFrame) lastFrame = now;
+        currentTime += (now - lastFrame) / 1000;
+        lastFrame = now;
+        if (currentTime >= totalDuration) {
+          currentTime = totalDuration;
+          setTime(currentTime);
+          pause();
+          return;
+        }
+        setTime(currentTime);
+        animationFrame = requestAnimationFrame(tick);
+      }
+
+      function play() {
+        if (currentTime >= totalDuration) setTime(0);
+        if (playing) return;
+        playing = true;
+        lastFrame = 0;
+        playButton.textContent = "❚❚ Pause";
+        playButton.setAttribute("aria-label", "Pause preview");
+        animationFrame = requestAnimationFrame(tick);
+      }
+
+      function pause() {
+        playing = false;
+        cancelAnimationFrame(animationFrame);
+        playButton.textContent = "▶ Play";
+        playButton.setAttribute("aria-label", "Play preview");
+      }
+
+      playButton.addEventListener("click", () => playing ? pause() : play());
+      document.getElementById("restart").addEventListener("click", () => {
+        pause();
+        setTime(0);
+      });
+      seek.addEventListener("input", () => {
+        pause();
+        setTime(Number(seek.value));
+      });
+      document.addEventListener("keydown", event => {
+        if (event.code === "Space" && !["INPUT", "BUTTON"].includes(document.activeElement.tagName)) {
+          event.preventDefault();
+          playing ? pause() : play();
+        }
+      });
+
+      setTime(0);
+    })();
+  </script>
+</body>
+</html>

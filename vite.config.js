@@ -6,7 +6,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(process.cwd(), 'index.html')
+        main: resolve(process.cwd(), 'index.html'),
+        customerJourneyVideo: resolve(process.cwd(), 'customer-journey-video.html')
       }
     }
   },
